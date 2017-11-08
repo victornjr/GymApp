@@ -1,0 +1,9 @@
+<ng-include src="'views/navbar.html'"></ng-include>
+<div layout="column" ng-cloak>
+    <section layout="row" flex>
+        <ng-include src="'views/sidenav.html'"></ng-include>
+        <md-content flex layout-padding>
+            <ng-include src="'views/home.html'" ng-if="current === 'home'" ng-controller=""></ng-include>
+        </md-content>
+    </section>
+</div>

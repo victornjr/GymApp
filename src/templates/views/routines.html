@@ -1,0 +1,66 @@
+<ng-include src="'views/sidenav.html'" ng-controller="SidenavCtrl"></ng-include>
+<md-content class="main">
+    <h2 class="main-header">Rutinas</h2>
+    <md-card layout="row">
+        <div flex="100">
+            <md-card-content>
+                <md-list flex>
+                    <md-list-item ng-click="routineDetails()" class="md-3-line" ng-repeat="item in items track by $index" ng-if="$index < items.length"
+                        ng-click="routineDetails()">
+                        <div class="md-list-item-text" layout="column">
+                            <h3>Nombre</h3>
+                            <h4>Músculo</h4>
+                            <p>Otra csa</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-card-content>
+        </div>
+    </md-card>
+    <div layout="row" layout-align="end" style="margin-bottom: 20px">
+        <div flex="20">
+            <md-button class="md-raised md-primary" ng-click="createRoutine()">Nueva rutina
+            </md-button>
+        </div>
+    </div>
+</md-content>
+
+<div style="visibility: hidden">
+    <div class="md-dialog-container" id="myDialog">
+        <md-dialog layout-padding style="padding:30px">
+            <div layout="row">
+                <div flex="20">
+                    <h2>Rutina X</h2>
+                </div>
+                <div flex="80" layout="row" layout-align="end center">
+                    <div flex="20">
+                        <md-button class="md-raised md-primary" ng-click="modifyRoutine()">Editar
+                        </md-button>
+                    </div>
+                </div>
+            </div>
+            <div layout="row">
+                <div flex="100">
+                    <h4>Músculo</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ejercicio</th>
+                                <th>Series</th>
+                                <th>Repeticiones</th>
+                                <th>Aparato</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in items track by $index" ng-if="$index < items.length">
+                                <td>Dato</td>
+                                <td>Dato</td>
+                                <td>Dato</td>
+                                <td>Dato</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </md-dialog>
+        </div>
+    </div>

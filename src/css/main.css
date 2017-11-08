@@ -1,0 +1,187 @@
+#loginView{
+    width: 100%;
+    height: 100%;
+    background: #EEE;
+    position: fixed;
+}
+
+md-toolbar:not(.md-menu-toolbar){
+    background-color: black;
+    position:fixed;
+    color: #fff;
+}
+
+.view{
+    min-height: 100%;
+}
+
+body, .view {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    overflow: hidden;
+    background: #ecebe8;
+  }
+
+  .loginContainer{
+    max-width: 400px;
+    margin: auto;
+    position: relative;
+    top: 150px;
+    left: 30%;
+}
+
+.loginForm{
+    background:#EEE;
+    width: 100%;
+    padding: 60px;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  .loginInput {
+    height: 40px !important;
+    background: #FFFFFF !important;
+    border-radius: 5px !important;
+    border: solid 1px #c2c2c2 !important;
+    padding-left: 8px !important;
+}
+
+.loginTitle {
+    font-size: 16px;
+    color: #424242;
+    margin: 0px;
+    padding: 0px;
+}
+
+.md-raised.md-primary:not([disabled]) {
+    background-color: #84bd00!important;
+}
+
+md-toolbar .md-toolbar-tools h2{
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.main{
+    margin-left: 60px;
+    background-color: #ecebe8;
+    height: 100%;
+}
+
+.main-header{
+    margin: 30px;
+    color: #636262;
+    padding: 15px;
+    background-color: #DDDDDA;
+    border-radius: 10px;
+}
+
+hr {
+    margin-top: 15px;
+    border-color: #c2c2c2;
+}
+    
+    .sideNav {
+      background: black;
+      height: 100vh;
+      color:#fff;
+      box-sizing: border-box;
+      width: 60px;
+      position: fixed;
+    }
+
+    .sideNav i {
+        color:#fff !important;
+    }
+
+    .sideNav div.menu-option:hover {
+        background:#686a6b !important;
+      }
+    
+    #sideNav {
+      height:100vh !important;
+      box-sizing: border-box;
+    }
+    
+    div.menu-option {
+        margin: 10px 10px;
+        height: 40px;
+        width: 40px;
+        border-radius: 3px;
+        cursor: pointer;
+        outline: 0px;
+    }
+    
+    div.menu-option svg{
+        margin: 8px 8px;
+    }
+    
+    div.menu-option svg.logout{
+        margin: 10px 11px;
+    }
+    
+    div.menu-divider{
+        width: 40px;
+        margin: 10px;
+        border-top: solid 1px #686a6b;
+    }
+
+.formSelect{
+    height: 30px;
+    width: 100%;
+    font-size: 12px;
+    color: #424242;
+    padding-left: 12px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: solid 1px #c2c2c2;
+}
+
+md-list-item p{
+    font-size: 13px;
+}
+
+.formInput{
+    height: 32px !important;
+    width: 250px !important;
+    background: #FFFFFF !important;
+    border-radius: 5px !important;
+    border: solid 1px #c2c2c2 !important;
+    padding-left: 8px !important;
+    font-size: 13px;
+}
+
+th, td{
+    font-size: 14px;
+    text-align: left;
+    width: 150px;
+    padding: 10px 0px;
+}
+
+.md-calendar-day-header, .md-calendar-scroll-container, .md-calendar-scroll-mask .md-virtual-repeat-container, .md-orient-vertical, .md-calendar{
+    width: 600px;
+    height: 500px;
+    margin:0px;
+    overflow: visible !important;
+}
+
+.md-calendar-scroll-mask{
+    min-height: 500px !important;
+}
+
+
+
+
+
+
+    
+
+
+
+
+
