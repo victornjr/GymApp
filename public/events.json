@@ -1,0 +1,54 @@
+{
+  "monthly": [
+    {
+      "id": 1,
+		"name": "Test double day",
+		"startdate": "2017-11-22",
+		"enddate": "2017-11-23",
+		"starttime": "00:00",
+		"endtime": "14:00",
+		"color": "#669966",
+		"url": ""
+		},
+		{
+		"id": 2,
+		"name": "Test single day with time",
+		"startdate": "2017-11-10",
+		"enddate": "",
+		"starttime": "12:00",
+		"endtime": "02:00",
+		"color": "#669966",
+		"url": ""
+		},
+		{
+		"id": 3,
+		"name": "Test events on same day",
+		"startdate": "2017-11-13",
+		"enddate": "",
+		"starttime": "",
+		"endtime": "",
+		"color": "#669966",
+		"url": ""
+		},
+		{
+		"id": 4,
+		"name": "Test events on same day",
+		"startdate": "2017-11-13",
+		"enddate": "",
+		"starttime": "",
+		"endtime": "",
+		"color": "#669966",
+		"url": ""
+		},
+		{
+		"id": 5,
+		"name": "Test events on same day",
+		"startdate": "2017-11-13",
+		"enddate": "",
+		"starttime": "",
+		"endtime": "",
+		"color": "#669966",
+		"url": ""
+		}
+    ]
+}
