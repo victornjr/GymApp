@@ -3,6 +3,5 @@ angular.module('gymApp')
     '$scope',
     function($scope) {
         console.log('Loaded.');
-
     }
 ]);

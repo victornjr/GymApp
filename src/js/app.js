@@ -13,6 +13,10 @@ angular.module('gymApp', [
                 templateUrl: 'views/login.html',
                 controller: 'LoginCtrl'
             })
+            .when('/', {
+                templateUrl: 'views/login.html',
+                controller: 'LoginCtrl'
+            })
             .when('/rutinas', {
                 templateUrl: 'views/routines.html',
                 controller: 'RoutinesCtrl'

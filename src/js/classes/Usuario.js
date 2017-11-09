@@ -1,28 +1,38 @@
-function Usuario(nombre, correo, contrasena){
+function Usuario(nombre, correo, contrasena) {
   this.nombre = nombre;
   this.correo = correo;
   this.contrasena = contrasena;
 
-  this.iniciarSesion = function(correo, contrasena){
-      //aqui va lo que hace la funcion de iniciar sesion
-  };
-
-  this.modificarRutina = function(rutina){
+  this.modificarRutina = function (rutina) {
 
   };
 
-  this.verRutina = function(){
+  this.verRutina = function () {
 
     return rutina;
   };
 
-  this.verCalendario = function(){
+  this.verCalendario = function () {
 
     return calendario;
   };
 
-  this.crearRutina = function(){
+  this.crearRutina = function () {
 
     return rutina;
   };
 }
+
+function iniciarSesion(correo, contrasena) {
+  $.getJSON("database/usuario.json", function (data) {
+    for (var i = 0; i < data.length; i++) {
+      if (correo === data[i].email && contrasena === data[i].password) {
+        this.nombre = data[i].name;
+        console.log(this.nombre,1);
+        return this.nombre;
+      }
+    }
+  });
+  console.log(this.nombre,2);
+  return this.nombre;
+};

@@ -35132,6 +35132,10 @@ angular.module('gymApp', [
                 templateUrl: 'views/login.html',
                 controller: 'LoginCtrl'
             })
+            .when('/', {
+                templateUrl: 'views/login.html',
+                controller: 'LoginCtrl'
+            })
             .when('/rutinas', {
                 templateUrl: 'views/routines.html',
                 controller: 'RoutinesCtrl'
@@ -35216,41 +35220,50 @@ function Rutina(){
   
 }
 
-function Usuario(nombre, correo, contrasena){
+function Usuario(nombre, correo, contrasena) {
   this.nombre = nombre;
   this.correo = correo;
   this.contrasena = contrasena;
 
-  this.iniciarSesion = function(correo, contrasena){
-      //aqui va lo que hace la funcion de iniciar sesion
-  };
-
-  this.modificarRutina = function(rutina){
+  this.modificarRutina = function (rutina) {
 
   };
 
-  this.verRutina = function(){
+  this.verRutina = function () {
 
     return rutina;
   };
 
-  this.verCalendario = function(){
+  this.verCalendario = function () {
 
     return calendario;
   };
 
-  this.crearRutina = function(){
+  this.crearRutina = function () {
 
     return rutina;
   };
 }
+
+function iniciarSesion(correo, contrasena) {
+  $.getJSON("database/usuario.json", function (data) {
+    for (var i = 0; i < data.length; i++) {
+      if (correo === data[i].email && contrasena === data[i].password) {
+        this.nombre = data[i].name;
+        console.log(this.nombre,1);
+        return this.nombre;
+      }
+    }
+  });
+  console.log(this.nombre,2);
+  return this.nombre;
+};
 
 angular.module('gymApp')
 .controller('HomeCtrl', [
     '$scope',
     function($scope) {
         console.log('Loaded.');
-
     }
 ]);
 
@@ -35293,27 +35306,29 @@ angular.module('gymApp')
     ]);
 angular.module('gymApp')
     .controller('LoginCtrl', [
-        '$scope', '$rootScope', '$location',
-        function ($scope, $rootScope, $location) {
-            console.log("LoginView");
-            $scope.user = { email: undefined, password: undefined }
+        '$scope', '$rootScope', '$location', '$http',
+        function ($scope, $rootScope, $location, $http) {
 
             if (localStorage.getItem('user') != null) {
-                $location.path("/home");
+                $location.path("/inicio");
+            } else {
+                $location.path("/login");
             }
 
             $scope.login = function login() {
-                if ($scope.user.email != undefined && $scope.user.password != undefined) {
-                    localStorage.setItem('user', JSON.stringify($scope.user));
-                    if ($scope.first) {
+                //var valid = iniciarSesion($scope.user.email, $scope.user.password);
+                var valid = true;
+                if(valid){
+                    if($scope.first)
                         $location.path("/cuestionario");
-                    } else
-                        $location.path("/home");
+                    else   
+                        $location.path("/inicio");
                 }
             }
 
             var init = function init() {
                 $scope.first = true;
+                $scope.user = { email: undefined, password: undefined }
             }
 
             init();
