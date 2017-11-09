@@ -35224,6 +35224,7 @@ function Usuario(nombre, correo, contrasena) {
   this.nombre = nombre;
   this.correo = correo;
   this.contrasena = contrasena;
+  this.first;
 
   this.modificarRutina = function (rutina) {
 
@@ -35245,19 +35246,7 @@ function Usuario(nombre, correo, contrasena) {
   };
 }
 
-function iniciarSesion(correo, contrasena) {
-  $.getJSON("database/usuario.json", function (data) {
-    for (var i = 0; i < data.length; i++) {
-      if (correo === data[i].email && contrasena === data[i].password) {
-        this.nombre = data[i].name;
-        console.log(this.nombre,1);
-        return this.nombre;
-      }
-    }
-  });
-  console.log(this.nombre,2);
-  return this.nombre;
-};
+
 
 angular.module('gymApp')
 .controller('HomeCtrl', [
@@ -35316,12 +35305,22 @@ angular.module('gymApp')
             }
 
             $scope.login = function login() {
-                //var valid = iniciarSesion($scope.user.email, $scope.user.password);
-                var valid = true;
-                if(valid){
-                    if($scope.first)
+                $http.get('database/usuario.json').
+                    then(function (response) {
+                        var data = response.data;
+                        for(var i = 0; i < data.length; i++){
+                            if(data[i].email === $scope.user.email && data[i].password === $scope.user.password){
+                                $scope.valid = true;
+                                $rootScope.user = new Usuario(data[i].name,data[i].email, data[i].password);
+                                return;
+                            }
+                        }
+                        console.log($rootScope.user);
+                    });
+                if ($scope.valid) {
+                    if ($scope.first)
                         $location.path("/cuestionario");
-                    else   
+                    else
                         $location.path("/inicio");
                 }
             }
@@ -35329,6 +35328,8 @@ angular.module('gymApp')
             var init = function init() {
                 $scope.first = true;
                 $scope.user = { email: undefined, password: undefined }
+                $scope.valid = false;
+                $rootScope.user;
             }
 
             init();

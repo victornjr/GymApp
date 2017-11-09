@@ -2,5 +2,12 @@
     "id":"0001",
     "name":"Julia Orduño",
     "email": "juliapaola97@gmail.com",
-    "password": "password123"
+    "password": "password123",
+    "first": "false"
+},{
+    "id":"0001",
+    "name":"Julia Orduño",
+    "email": "juliapaoa97@gmail.com",
+    "password": "password123",
+    "first": "false"
 }]

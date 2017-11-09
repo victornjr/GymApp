@@ -10,12 +10,22 @@ angular.module('gymApp')
             }
 
             $scope.login = function login() {
-                //var valid = iniciarSesion($scope.user.email, $scope.user.password);
-                var valid = true;
-                if(valid){
-                    if($scope.first)
+                $http.get('database/usuario.json').
+                    then(function (response) {
+                        var data = response.data;
+                        for(var i = 0; i < data.length; i++){
+                            if(data[i].email === $scope.user.email && data[i].password === $scope.user.password){
+                                $scope.valid = true;
+                                $rootScope.user = new Usuario(data[i].name,data[i].email, data[i].password);
+                                return;
+                            }
+                        }
+                        console.log($rootScope.user);
+                    });
+                if ($scope.valid) {
+                    if ($scope.first)
                         $location.path("/cuestionario");
-                    else   
+                    else
                         $location.path("/inicio");
                 }
             }
@@ -23,6 +33,8 @@ angular.module('gymApp')
             var init = function init() {
                 $scope.first = true;
                 $scope.user = { email: undefined, password: undefined }
+                $scope.valid = false;
+                $rootScope.user;
             }
 
             init();
