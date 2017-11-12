@@ -1,3 +1,4 @@
 function Calendario(){
   
+    this.dias = [];
 }

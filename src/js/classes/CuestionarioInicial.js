@@ -14,6 +14,6 @@ function CuestionarioInicial(){
   ];
   this.respuestas = [];
   this.addPreguntas = function(index){
-    document.getElementById('preguntas').innerHTML = preguntas[index];
+    //document.getElementById('preguntas').innerHTML = preguntas[index];
   };
 }

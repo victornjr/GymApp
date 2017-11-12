@@ -12,5 +12,22 @@
 <body>
     <ng-view class="view"></ng-view>
 </body>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyBN8E11T0PK5Xhw5l81UuDSJA2UT_iuBDE",
+        authDomain: "gymapp-38342.firebaseapp.com",
+        databaseURL: "https://gymapp-38342.firebaseio.com",
+        projectId: "gymapp-38342",
+        storageBucket: "gymapp-38342.appspot.com",
+        messagingSenderId: "130779018358"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database().ref();
+
+</script>
 <script src="js/scripts.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
 </html>

@@ -3,40 +3,57 @@
     <md-card layout="row">
         <div flex="100">
             <md-card-title>
-                <h3>Rutina Nueva</h3>
+                <h3 ng-if="!isEditing">Rutina Nueva</h3>
+                <h3 ng-if="isEditing">{{routine.nombre}}</h3>
             </md-card-title>
             <md-card-content>
                 <div layout="row">
                     <div flex="20">
-                        <md-select ng-model="selectedMuscle" class="formSelect md-no-underline" placeholder="Músculos" ng-change="getExercises()">
+                        <md-select ng-model="selectedMuscle" class="formSelect md-no-underline" placeholder="Músculos" ng-change="getExercises(selectedMuscle)">
                             <md-option ng-repeat="muscle in muscles" value="{{muscle}}">
                                 {{muscle}}
                             </md-option>
                         </md-select>
                     </div>
                     <div flex="40" style="padding-left:30px">
-                        <h5>N Ejercicios seleccionados</h5>
+                        <h5>{{routineExercises.length}} Ejercicios seleccionados</h5>
                     </div>
                 </div>
-                <div layout="row">
+                <div layout="row" ng-if="selectedMuscle">
                     <div flex="100">
                         <md-subheader class="md-no-sticky">Ejercicios</md-subheader>
-                        <md-list-item ng-repeat="exercise in exercises track by $index" ng-if="$index < exercises.length">
-                            <p>Ejercicio {{ $index }} </p>
-                            <md-checkbox class="md-primary" ng-model="selected"></md-checkbox>
+                        <md-list-item ng-repeat="exercise in exercises track by $index">
+                            <input type="checkbox" style="margin-right: 30px" class="md-primary" ng-model="exercise.selected" ng-change="addExercise(exercise)"
+                            />
+                            <p>{{exercise.nombre}}</p>
+                            <md-select ng-if="exercise.selected && exercise.medium != -1" style="width:200px; margin: 5" ng-model="exercise.medio" class="formSelect md-no-underline"
+                                placeholder="Medio" >
+                                <md-option ng-repeat="medium in exercise.medium" value="{{mediums[medium]}}">
+                                    {{mediums[medium]}}
+                                </md-option>
+                            </md-select>
+                            <md-input-container md-no-float class="formInput" ng-if="exercise.selected && exercise.medium == -1" style="margin:5px; width:214px !important; height:32px !important; padding:0;">
+                                <input style="border:none !important" ng-model="exercise.medio" placeholder="Medio">
+                            </md-input-container>
+                            <md-input-container md-no-float class="formInput" ng-if="exercise.selected" style="margin:5px; width:214px !important; height:32px !important; padding:0;">
+                                <input type="number" style="border:none !important" ng-model="exercise.repeticiones" placeholder="Repeticiones">
+                            </md-input-container>
+                            <md-input-container md-no-float class="formInput" ng-if="exercise.selected" style="margin:5px; width:214px !important; height:32px !important; padding:0;">
+                                <input type="number" style="border:none !important" ng-model="exercise.series" placeholder="Series">
+                            </md-input-container>
                         </md-list-item>
 
                     </div>
                 </div>
-                <div layout="row">
-                    <div flex="30">
-                        <md-input-container md-no-float class="formInput">
-                            <input style="border:none !important" ng-model="routine.name" name="name" placeholder="Nombre">
-                        </md-input-container>
+                <div layout="row" ng-if="!selectedMuscle">
+                    <div flex="100">
+                        <p>Selecciona un músculo para desplegar los ejercicios</p>
                     </div>
+                </div>
+                <div layout="row" ng-if="selectedMuscle">
                     <div flex="30">
                         <md-input-container md-no-float class="formInput">
-                            <input style="border:none !important" ng-model="routine.comments" name="comments" placeholder="Comentarios">
+                            <input style="border:none !important" ng-model="routine.nombre" name="name" placeholder="Nombre">
                         </md-input-container>
                     </div>
                 </div>
@@ -49,8 +66,10 @@
             </md-button>
         </div>
         <div flex="15">
-            <md-button class="md-raised md-primary" ng-click="createRoutine()">Crear rutina
+            <md-button ng-if="!isEditing" class="md-raised md-primary" ng-click="createRoutine()">Crear rutina
             </md-button>
+            <md-button ng-if="isEditing" class="md-raised md-primary" ng-click="createRoutine()">Aceptar
+                </md-button>
         </div>
     </div>
 </md-content>

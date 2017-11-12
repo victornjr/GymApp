@@ -5,11 +5,6 @@
     position: fixed;
 }
 
-md-toolbar:not(.md-menu-toolbar){
-    background-color: black;
-    position:fixed;
-    color: #fff;
-}
 
 .view{
     min-height: 100%;
@@ -22,15 +17,15 @@ body, .view {
     height: auto;
     min-height: 100%;
     overflow: hidden;
-    background: #ecebe8;
+    background: #fff;
   }
 
   .loginContainer{
     max-width: 400px;
-    margin: auto;
+    margin-left:0;
     position: relative;
     top: 150px;
-    left: 30%;
+    left: 10%;
 }
 
 .loginForm{
@@ -51,7 +46,7 @@ body, .view {
 
 .loginTitle {
     font-size: 16px;
-    color: #424242;
+    color: #212529;
     margin: 0px;
     padding: 0px;
 }
@@ -67,16 +62,16 @@ md-toolbar .md-toolbar-tools h2{
 }
 
 .main{
-    margin-left: 60px;
-    background-color: #ecebe8;
+    margin-left: 250px;
+    background-color: #fff;
     height: 100%;
 }
 
 .main-header{
     margin: 30px;
-    color: #636262;
+    color: black;
     padding: 15px;
-    background-color: #DDDDDA;
+    background-color: #e9ecef;
     border-radius: 10px;
 }
 
@@ -86,48 +81,39 @@ hr {
 }
     
     .sideNav {
-      background: black;
+      background: #212529;
       height: 100vh;
       color:#fff;
       box-sizing: border-box;
-      width: 60px;
+      width: 250px;
       position: fixed;
     }
 
     .sideNav i {
         color:#fff !important;
     }
-
-    .sideNav div.menu-option:hover {
-        background:#686a6b !important;
-      }
     
     #sideNav {
       height:100vh !important;
       box-sizing: border-box;
     }
     
-    div.menu-option {
+    .menu-option {
         margin: 10px 10px;
-        height: 40px;
-        width: 40px;
         border-radius: 3px;
         cursor: pointer;
         outline: 0px;
     }
-    
-    div.menu-option svg{
-        margin: 8px 8px;
+
+    .menu-option .md-button:not([disabled]):hover {
+        background-color: rgba(54, 54, 54, 0.2);
     }
     
-    div.menu-option svg.logout{
-        margin: 10px 11px;
-    }
     
     div.menu-divider{
-        width: 40px;
+        width: 230px;
         margin: 10px;
-        border-top: solid 1px #686a6b;
+        border-top: solid 1px #383B3D;
     }
 
 .formSelect{

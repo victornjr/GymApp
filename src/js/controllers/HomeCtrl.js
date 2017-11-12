@@ -1,7 +1,9 @@
-angular.module('gymApp')
-.controller('HomeCtrl', [
-    '$scope',
-    function($scope) {
-        console.log('Loaded.');
+angular.module('gymApp').controller('HomeCtrl', ['$scope','$rootScope', function($scope, $rootScope) {
+        var init = function init(){
+            $rootScope.getUser();
+            $rootScope.getRoutines();
+        }
+
+        init();
     }
 ]);

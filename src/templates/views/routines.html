@@ -5,12 +5,9 @@
         <div flex="100">
             <md-card-content>
                 <md-list flex>
-                    <md-list-item ng-click="routineDetails()" class="md-3-line" ng-repeat="item in items track by $index" ng-if="$index < items.length"
-                        ng-click="routineDetails()">
+                    <md-list-item class="md-3-line" ng-repeat="routine in routines track by $index" ng-click="routineDetails(routine,$index)">
                         <div class="md-list-item-text" layout="column">
-                            <h3>Nombre</h3>
-                            <h4>Músculo</h4>
-                            <p>Otra csa</p>
+                            <h3>{{routine.nombre}}</h3>
                         </div>
                     </md-list-item>
                 </md-list>
@@ -29,8 +26,8 @@
     <div class="md-dialog-container" id="myDialog">
         <md-dialog layout-padding style="padding:30px">
             <div layout="row">
-                <div flex="20">
-                    <h2>Rutina X</h2>
+                <div flex="40">
+                    <h3>{{selectedRoutine.nombre}}</h3>
                 </div>
                 <div flex="80" layout="row" layout-align="end center">
                     <div flex="20">
@@ -39,24 +36,24 @@
                     </div>
                 </div>
             </div>
-            <div layout="row">
+            <div layout="row" ng-repeat="muscle in routineExercises"> 
                 <div flex="100">
-                    <h4>Músculo</h4>
+                    <h4>{{muscle.muscle}}</h4>
                     <table>
                         <thead>
                             <tr>
                                 <th>Ejercicio</th>
                                 <th>Series</th>
                                 <th>Repeticiones</th>
-                                <th>Aparato</th>
+                                <th>Medio</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="item in items track by $index" ng-if="$index < items.length">
-                                <td>Dato</td>
-                                <td>Dato</td>
-                                <td>Dato</td>
-                                <td>Dato</td>
+                            <tr ng-repeat="exercise in muscle.exercises">
+                                <td>{{exercise.nombre}}</td>
+                                <td>{{exercise.series}}</td>
+                                <td>{{exercise.repeticiones}}</td>
+                                <td>{{exercise.medio}}</td>
                             </tr>
                         </tbody>
                     </table>

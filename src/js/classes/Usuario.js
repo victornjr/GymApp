@@ -24,4 +24,20 @@ function Usuario(nombre, correo, contrasena) {
   };
 }
 
+function iniciarSesion(correo, contrasena) {
+  var userType = correo.split("")[0] === 'A' ? "alumnos" : "entrenadores";
+  var query = database.child(userType);
+  var valid;
+  query.once("value").then(function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      if (childSnapshot.val().correo === correo && childSnapshot.val().contrasena === contrasena) {
+        localStorage.setItem('user',childSnapshot.val());
+        localStorage.setItem('userId', childSnapshot.key);
+        return true;
+      }
+    });
+    return valid;
+  });
+}
+
 

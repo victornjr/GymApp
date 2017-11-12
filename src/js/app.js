@@ -1,5 +1,5 @@
 angular.module('gymApp', [
-    'ngRoute','ngMaterial'
+    'ngRoute','ngMaterial','firebase'
 ])
 .config([
     '$routeProvider',
@@ -25,7 +25,7 @@ angular.module('gymApp', [
                 templateUrl: 'views/createRoutine.html',
                 controller: 'CreateRoutineCtrl'
             })
-            .when('/rutinas/modificar/:id',{
+            .when('/rutinas/modificar/:id/:name',{
                 templateUrl: 'views/createRoutine.html',
                 controller: 'CreateRoutineCtrl'
             })
@@ -38,4 +38,25 @@ angular.module('gymApp', [
                 controller: 'QuestionnaireCtrl'
             });
     }
-]);
+]).run(['$rootScope', '$location','$firebaseObject', function ($rootScope, $location, $firebaseObject) {
+    
+    $rootScope.getUser = function getUser(){
+        var user = JSON.parse(localStorage.getItem('user'));
+        //Validar tipo usuario
+        $rootScope.userId = localStorage.getItem('userId');
+        $rootScope.user = new Alumno(user.nombre, user.correo, user.contrasena);
+    }
+
+    $rootScope.getRoutines = function getRoutines() {
+        var ref = firebase.database().ref('alumnos/' + $rootScope.userId + '/rutinas');
+        var data = $firebaseObject(ref);
+        data.$loaded().then(function () {
+            angular.forEach(data, function (value, key) {
+                $rootScope.user.rutinas.push(value);
+            });
+            //$rootScope.user.rutinas = $scope.routines;
+            localStorage.setItem('user', JSON.stringify($rootScope.user));
+        });
+    }
+
+  }]);

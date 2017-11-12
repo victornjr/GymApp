@@ -1,97 +1,100 @@
-<div id="loginView">
-    <div class="loginContainer">
-        <div class="loginForm">
-            <div>
-                <form novalidate name="loginForm">
-                    <div class="loginTitle">
-                        <h2>¡Bienvenido! Ingresa a tu cuenta</h2>
-                    </div>
-                    <div class="loginBody row margin-top-20x">
-                        <md-input-container md-no-float class="md-block">
-                            <input ng-model="user.email" name="email" class="loginInput" placeholder="Correo Electrónico" autocomplete="off" required>
+<div id="loginView" layout="row">
+    <div flex="60" style="background-image:url('http://www.howleysbutchers.ie/wp-content/uploads/2016/03/empty-gym.jpg')"></div>
+    <div flex="40">
+        <div class="loginContainer">
+            <div class="loginForm">
+                <div>
+                    <form novalidate name="loginForm">
+                        <div class="loginTitle">
+                            <h2>¡Bienvenido! Ingresa a tu cuenta</h2>
+                        </div>
+                        <div class="loginBody row margin-top-20x">
+                            <md-input-container md-no-float class="md-block">
+                                <input ng-model="user.email" name="email" class="loginInput" placeholder="Correo Electrónico" autocomplete="off" required>
 
-                            <!--<div ng-show="loginForm.email.$invalid && loginForm.email.$touched">
-                                <div ng-message="true">¡Correo invalido! Intenta de nuevo</div>
-                            </div>-->
-                        </md-input-container>
+                                <!--<div ng-show="loginForm.email.$invalid && loginForm.email.$touched">
+                                            <div ng-message="true">¡Correo invalido! Intenta de nuevo</div>
+                                        </div>-->
+                            </md-input-container>
 
-                        <md-input-container md-no-float class="md-block">
-                            <input required name="password" class="loginInput" type="password" ng-model="user.password" placeholder="Contraseña"
-                                autocomplete="off">
+                            <md-input-container md-no-float class="md-block">
+                                <input required name="password" class="loginInput" type="password" ng-model="user.password" placeholder="Contraseña" autocomplete="off">
 
-                            <!--<div ng-show="loginForm.password.$invalid && loginForm.password.$touched">
-                                <div ng-message="true" class="md-input-message-animation">
-                                    ¡Contraseña inválida! Intenta de nuevo
+                                <!--<div ng-show="loginForm.password.$invalid && loginForm.password.$touched">
+                                            <div ng-message="true" class="md-input-message-animation">
+                                                ¡Contraseña inválida! Intenta de nuevo
+                                            </div>
+                                        </div>-->
+                            </md-input-container>
+
+                            <!--<div layout="row" layout-sm="column" layout-align="space-around">
+                                        <md-progress-circular ng-show="loggingin" md-mode="indeterminate"></md-progress-circular>
+                                    </div>-->
+
+
+                            <div layout="column">
+                                <md-button class="md-raised md-primary" ng-click="login()">INICIAR SESIÓN
+                                </md-button>
+                            </div>
+                            <hr></hr>
+                            <div layout="column text-center">
+                                <a class="forggotPassword">¿Has olvidado los datos de tu cuenta?</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div ng-show="mode=='reg'">
+                    <form novalidate name="regForm">
+                        <div class="loginTitle text-center">
+                            <h1>Inicia Sesión</h1>
+                        </div>
+                        <div class="loginBody row margin-top-20x">
+                            <md-input-container md-no-float class="md-block">
+                                <input type="text" ng-model="regData.name" name="rname" required placeholder="Nombre" autocomplete="off">
+                                <div ng-show="regForm.rname.$invalid && regForm.rname.$touched">
+                                    <div ng-message="true">Por favor introduce tu nombre</div>
                                 </div>
-                            </div>-->
-                        </md-input-container>
+                            </md-input-container>
 
-                        <!--<div layout="row" layout-sm="column" layout-align="space-around">
-                            <md-progress-circular ng-show="loggingin" md-mode="indeterminate"></md-progress-circular>
-                        </div>-->
+                            <md-input-container md-no-float class="md-block">
+                                <input ng-model="regData.email" type="email" name="remail" required placeholder="Correo Electrónico" autocomplete="off">
+                                <div ng-show="regForm.remail.$invalid && regForm.remail.$touched">
+                                    <div ng-message="true">Por favor introduce tu correo</div>
+                                </div>
+                            </md-input-container>
 
+                            <md-input-container md-no-float class="md-block">
+                                <input type="password" ng-model="regData.password" required placeholder="Contraseña" autocomplete="off" name="rpassword">
+                                <div ng-show="regForm.rpassword.$invalid && regForm.rpassword.$touched">
+                                    <div ng-message="true">Por favor introduce tu contraseña</div>
+                                </div>
+                            </md-input-container>
 
-                        <div layout="column">
-                            <md-button class="md-raised md-primary" ng-click="login()">INICIAR SESIÓN
-                            </md-button>
+                            <div layout="row" layout-sm="column" layout-align="space-around">
+                                <md-progress-circular ng-show="loggingin" md-mode="indeterminate"></md-progress-circular>
+                            </div>
+
+                            <div layout="column">
+                                <md-button ng-disabled="loggingin" class="md-raised md-primary" ng-click="signup()">
+                                    REGISTRAR
+                                </md-button>
+                            </div>
+                            <div layout="column text-center">
+                                <a class="forggotPassword" ui-sref="forgot">¿Olvidaste tu contraseña?</a>
+                            </div>
                         </div>
-                        <hr></hr>
-                        <div layout="column text-center">
-                            <a class="forggotPassword">¿Has olvidado los datos de tu cuenta?</a>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
+
             </div>
-
-            <div ng-show="mode=='reg'">
-                <form novalidate name="regForm">
-                    <div class="loginTitle text-center">
-                        <h1>Inicia Sesión</h1>
-                    </div>
-                    <div class="loginBody row margin-top-20x">
-                        <md-input-container md-no-float class="md-block">
-                            <input type="text" ng-model="regData.name" name="rname" required placeholder="Nombre" autocomplete="off">
-                            <div ng-show="regForm.rname.$invalid && regForm.rname.$touched">
-                                <div ng-message="true">Por favor introduce tu nombre</div>
-                            </div>
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <input ng-model="regData.email" type="email" name="remail" required placeholder="Correo Electrónico" autocomplete="off">
-                            <div ng-show="regForm.remail.$invalid && regForm.remail.$touched">
-                                <div ng-message="true">Por favor introduce tu correo</div>
-                            </div>
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <input type="password" ng-model="regData.password" required placeholder="Contraseña" autocomplete="off" name="rpassword">
-                            <div ng-show="regForm.rpassword.$invalid && regForm.rpassword.$touched">
-                                <div ng-message="true">Por favor introduce tu contraseña</div>
-                            </div>
-                        </md-input-container>
-
-                        <div layout="row" layout-sm="column" layout-align="space-around">
-                            <md-progress-circular ng-show="loggingin" md-mode="indeterminate"></md-progress-circular>
-                        </div>
-
-                        <div layout="column">
-                            <md-button ng-disabled="loggingin" class="md-raised md-primary" ng-click="signup()">
-                                REGISTRAR
-                            </md-button>
-                        </div>
-                        <div layout="column text-center">
-                            <a class="forggotPassword" ui-sref="forgot">¿Olvidaste tu contraseña?</a>
-                        </div>
-                    </div>
-                </form>
+            <div layout="column" class="row text-center margin-top-20x">
+                <!--<a ng-click="mode='reg'" ng-hide="mode=='reg'" class="clickable color-grey-900">¿Aun no tienes cuenta? <span
+                                        class="color-blue">Comienza ahora</span></a>-->
+                <a ng-click="mode='login'" ng-show="mode=='reg'" class="clickable color-grey-900">¿Ya estás en zubut? <span
+                                        class="color-blue">Ingresa aquí</span></a>
             </div>
-
-        </div>
-        <div layout="column" class="row text-center margin-top-20x">
-            <!--<a ng-click="mode='reg'" ng-hide="mode=='reg'" class="clickable color-grey-900">¿Aun no tienes cuenta? <span
-                            class="color-blue">Comienza ahora</span></a>-->
-            <a ng-click="mode='login'" ng-show="mode=='reg'" class="clickable color-grey-900">¿Ya estás en zubut? <span
-                            class="color-blue">Ingresa aquí</span></a>
         </div>
     </div>
+
 </div>
