@@ -3,4 +3,5 @@ function Rutina(nombre, ejercicios){
     this.cardio;
     this.listaEjercicios = ejercicios;
     this.tiempo;
+    this.terminado = false;
 }

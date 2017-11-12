@@ -27,7 +27,7 @@
                             />
                             <p>{{exercise.nombre}}</p>
                             <md-select ng-if="exercise.selected && exercise.medium != -1" style="width:200px; margin: 5" ng-model="exercise.medio" class="formSelect md-no-underline"
-                                placeholder="Medio" >
+                                placeholder="Medio">
                                 <md-option ng-repeat="medium in exercise.medium" value="{{mediums[medium]}}">
                                     {{mediums[medium]}}
                                 </md-option>
@@ -56,6 +56,9 @@
                             <input style="border:none !important" ng-model="routine.nombre" name="name" placeholder="Nombre">
                         </md-input-container>
                     </div>
+                    <div flex="30">
+                        <md-datepicker ng-model="selectedDate" md-placeholder="Escoger fecha" ng-change="setDate(selectedDate)" md-open-on-focus></md-datepicker>
+                    </div>
                 </div>
             </md-card-content>
         </div>
@@ -69,7 +72,7 @@
             <md-button ng-if="!isEditing" class="md-raised md-primary" ng-click="createRoutine()">Crear rutina
             </md-button>
             <md-button ng-if="isEditing" class="md-raised md-primary" ng-click="createRoutine()">Aceptar
-                </md-button>
+            </md-button>
         </div>
     </div>
 </md-content>

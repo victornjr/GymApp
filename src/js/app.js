@@ -45,6 +45,7 @@ angular.module('gymApp', [
         //Validar tipo usuario
         $rootScope.userId = localStorage.getItem('userId');
         $rootScope.user = new Alumno(user.nombre, user.correo, user.contrasena);
+        //$rootScope.getCalendar();
     }
 
     $rootScope.getRoutines = function getRoutines() {
@@ -54,7 +55,18 @@ angular.module('gymApp', [
             angular.forEach(data, function (value, key) {
                 $rootScope.user.rutinas.push(value);
             });
-            //$rootScope.user.rutinas = $scope.routines;
+            localStorage.setItem('user', JSON.stringify($rootScope.user));
+        });
+    }
+
+    $rootScope.getCalendar = function getCalendar(){
+        var ref = firebase.database().ref('alumnos/' + $rootScope.userId + '/calendario');
+        var data = $firebaseObject(ref);
+        data.$loaded().then(function () {
+            angular.forEach(data, function (value, key) {
+                $rootScope.user.calendario.dias = value;
+                localStorage.setItem('dates', JSON.stringify(value));
+            });
             localStorage.setItem('user', JSON.stringify($rootScope.user));
         });
     }

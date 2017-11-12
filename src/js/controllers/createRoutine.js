@@ -15,6 +15,7 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
 
         $scope.createRoutine = function createRoutine() {
             var newRoutine = new Rutina($scope.routine.nombre, $scope.routineExercises);
+            newRoutine.dates = $scope.routine.dates;
             var index = $routeParams.id;
             if($rootScope.isEditing){
                 $rootScope.user.modificarRutina(newRoutine, index);
@@ -81,6 +82,11 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
             }
         }
 
+        $scope.setDate = function setDate(date){
+            if(!$scope.routine.dates.includes(date))
+                $scope.routine.dates.push(date);
+        }
+
         var init = function init() {
             if(!$rootScope.user){
                 $rootScope.getUser();
@@ -93,8 +99,9 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
             getMuscles();
             getMediums();
             $scope.selected = false;
-            $scope.routine = {nombre:undefined}
+            $scope.routine = {nombre:undefined, dates:[]}
             $rootScope.isEditing = localStorage.getItem('isEditing');
+            $scope.selectedDate = moment().format('ll');
             if($rootScope.isEditing){
                 $scope.routine = JSON.parse(localStorage.getItem('currentRoutine'));
                 $scope.selectedMuscle = $scope.routine.listaEjercicios[0].musculo;

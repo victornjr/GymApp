@@ -13,7 +13,5 @@ function CuestionarioInicial(){
     "¿Te gustaría recibir ayuda de un entrenador?"
   ];
   this.respuestas = [];
-  this.addPreguntas = function(index){
-    //document.getElementById('preguntas').innerHTML = preguntas[index];
-  };
+
 }
