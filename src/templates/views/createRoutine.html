@@ -59,6 +59,9 @@
                     <div flex="30">
                         <md-datepicker ng-model="selectedDate" md-placeholder="Escoger fecha" ng-change="setDate(selectedDate)" md-open-on-focus></md-datepicker>
                     </div>
+                    <div flex="30">
+                        <p ng-repeat="date in routine.dates">{{date}}</p>
+                    </div>
                 </div>
             </md-card-content>
         </div>

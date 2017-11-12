@@ -59,8 +59,10 @@ function Alumno(nombre, correo, contrasena) {
     if(!this.calendario){
       this.calendario = new Calendario();
     }
+    var obj = {}
     for(var i=0; i<rutina.dates.length; i++){
       var fecha = rutina.dates[i];
+      rutina.dates[i] = rutina.dates[i].toString();
       if(!this.calendario.dias[fecha]){
         this.calendario.dias[fecha] = {};
         this.calendario.dias[fecha][index] = false;
@@ -72,7 +74,7 @@ function Alumno(nombre, correo, contrasena) {
       }
     }
     var id = localStorage.getItem('userId');
-    //database.child('alumnos/' + id + '/rutinas/' + index + '/dates').set(rutina.dates);
+    database.child('alumnos/' + id + '/fechas/' + index).set(rutina.dates);
     database.child('alumnos/' + id + '/calendario/días').set(this.calendario.dias);
   }
 

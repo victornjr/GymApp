@@ -3,10 +3,10 @@
     <div flex="40">
         <div class="loginContainer">
             <div class="loginForm">
-                <div>
+                <div ng-if="mode === 'login'">
                     <form novalidate name="loginForm">
                         <div class="loginTitle">
-                            <h2>¡Bienvenido! Ingresa a tu cuenta</h2>
+                            <h2>¡Bienvenido a GymApp! Ingresa a tu cuenta</h2>
                         </div>
                         <div class="loginBody row margin-top-20x">
                             <md-input-container md-no-float class="md-block">
@@ -38,45 +38,56 @@
                             </div>
                             <hr></hr>
                             <div layout="column text-center">
-                                <a class="forggotPassword">¿Has olvidado los datos de tu cuenta?</a>
+                                <a class="registerLink">¿Aún no tienes una cuenta? <strong style="cursor:pointer;" ng-click="toggleRegister('reg')">Regístrate</strong></a>
                             </div>
                         </div>
                     </form>
                 </div>
 
-                <div ng-show="mode=='reg'">
+                <div ng-if="mode=='reg'">
                     <form novalidate name="regForm">
-                        <div class="loginTitle text-center">
-                            <h1>Inicia Sesión</h1>
+                        <div class="loginTitle">
+                            <h2>Regístrate en GymApp</h2>
                         </div>
                         <div class="loginBody row margin-top-20x">
                             <md-input-container md-no-float class="md-block">
-                                <input type="text" ng-model="regData.name" name="rname" required placeholder="Nombre" autocomplete="off">
+                                <input class="loginInput" type="text" ng-model="regData.name" name="rname" required placeholder="Nombre" autocomplete="off"
+                                ng-keyup="$event.keyCode == 13 ? validateForm() : null" ng-blur="validateForm()">
                                 <div ng-show="regForm.rname.$invalid && regForm.rname.$touched">
                                     <div ng-message="true">Por favor introduce tu nombre</div>
                                 </div>
                             </md-input-container>
 
                             <md-input-container md-no-float class="md-block">
-                                <input ng-model="regData.email" type="email" name="remail" required placeholder="Correo Electrónico" autocomplete="off">
-                                <div ng-show="regForm.remail.$invalid && regForm.remail.$touched">
+                                <input class="loginInput" ng-model="regData.email" type="email" name="remail" required placeholder="Correo Electrónico" autocomplete="off"
+                                    ng-keyup="$event.keyCode == 13 ? validateEmail() : null" ng-blur="validateEmail()">
+                                <div ng-show="regForm.remail.$invalid && regForm.remail.$touched || invalidEmail">
                                     <div ng-message="true">Por favor introduce tu correo</div>
                                 </div>
                             </md-input-container>
 
                             <md-input-container md-no-float class="md-block">
-                                <input type="password" ng-model="regData.password" required placeholder="Contraseña" autocomplete="off" name="rpassword">
-                                <div ng-show="regForm.rpassword.$invalid && regForm.rpassword.$touched">
+                                <input class="loginInput" type="password" ng-model="regData.password" required placeholder="Contraseña" autocomplete="off"
+                                    name="rpassword" ng-keyup="$event.keyCode == 13 ? validatePassword() : null" ng-blur="validatePassword()">
+                                <div ng-show="regForm.rpassword.$invalid && regForm.rpassword.$touched || invalidPassword">
                                     <div ng-message="true">Por favor introduce tu contraseña</div>
                                 </div>
                             </md-input-container>
 
-                            <div layout="row" layout-sm="column" layout-align="space-around">
+                            <md-input-container md-no-float class="md-block">
+                                <input class="loginInput" type="password" ng-model="regData.confirmPassword" required placeholder="Contraseña" autocomplete="off"
+                                    name="rcpassword" ng-keyup="$event.keyCode == 13 ? confirmPassword() : null" ng-blur="confirmPassword()" ng-disabled="disableConfirm">
+                                <div ng-show="regForm.rcpassword.$invalid && regForm.rcpassword.$touched || invalidConfirm">
+                                    <div ng-message="true">Por favor confirma tu contraseña</div>
+                                </div>
+                            </md-input-container>
+
+                            <!--<div layout="row" layout-sm="column" layout-align="space-around">
                                 <md-progress-circular ng-show="loggingin" md-mode="indeterminate"></md-progress-circular>
-                            </div>
+                            </div>-->
 
                             <div layout="column">
-                                <md-button ng-disabled="loggingin" class="md-raised md-primary" ng-click="signup()">
+                                <md-button ng-disabled="notFull" class="md-raised md-primary" ng-click="signup()">
                                     REGISTRAR
                                 </md-button>
                             </div>

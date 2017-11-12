@@ -1,3 +1,20 @@
 <ng-include src="'views/sidenav.html'" ng-controller="SidenavCtrl"></ng-include>
 <md-content class="main">
+    <h2 class="main-header">Dashboard</h2>
+    <div ng-if="userType === 1" layout="row" style="margin: 24px 36px !important">
+        <div flex="50">
+            <md-list flex ng-if="requests.length>0">
+                <md-subheader class="md-no-sticky">Solicitudes</md-subheader>
+                <md-list-item ng-repeat="request in requests track by $index" class="noright">
+                    <p>{{ request.name}}</p>
+                    <md-button class="md-raised md-secondary request-btn" style="background-color: #84bd00; color:white" ng-click="answerRequest(true,request.id, $index)">Aceptar</md-button>
+                    <md-button class="md-raised md-secondary md-warn request-btn" ng-click="answerRequest(false, request.id, $index)">Rechazar</md-button>
+                </md-list-item>
+            </md-list>
+            <div ng-if="requests.length <1">
+                <md-subheader class="md-no-sticky">Solicitudes</md-subheader>
+                <p>No tienes solicitudes.</p>
+            </div>
+        </div>
+    </div>
 </md-content>

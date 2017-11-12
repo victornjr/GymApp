@@ -83,8 +83,21 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
         }
 
         $scope.setDate = function setDate(date){
+            date = moment(date).format('ll');
             if(!$scope.routine.dates.includes(date))
                 $scope.routine.dates.push(date);
+        }
+
+        var getDates = function getDates(){
+            $scope.routine.dates = [];
+            var ref = firebase.database().ref('alumnos/' + $rootScope.userId + '/fechas/' + $routeParams.id);
+            var data = $firebaseObject(ref);
+            data.$loaded().then(function () {
+                angular.forEach(data, function (value, key) {
+                    //$scope.routine.dates.push(new Date(value));
+                    $scope.routine.dates.push(moment(value).format('ll'));
+                });
+            });
         }
 
         var init = function init() {
@@ -104,12 +117,14 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
             $scope.selectedDate = moment().format('ll');
             if($rootScope.isEditing){
                 $scope.routine = JSON.parse(localStorage.getItem('currentRoutine'));
+
                 $scope.selectedMuscle = $scope.routine.listaEjercicios[0].musculo;
                 $scope.routineExercises = $scope.routine.listaEjercicios;
                 $scope.routineExercises.map(function(item){
                     delete item['$$hashKey'];
                 })
                 $scope.getExercises($scope.selectedMuscle);
+                getDates();
             }
         }
 
