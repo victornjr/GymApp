@@ -25,6 +25,7 @@ angular.module('gymApp').controller('HomeCtrl', ['$scope', '$rootScope', '$fireb
     var init = function init() {
         $rootScope.getUser();
         $rootScope.getStudents();
+        $rootScope.getRoutines();
         getRequests();
     }
 

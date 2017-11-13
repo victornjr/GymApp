@@ -4,7 +4,7 @@
     <div layout="row" style="margin: 24px 36px !important">
         <div flex="100">
             <md-list flex>
-                <md-list-item ng-repeat="student in students">{{student.name}}</md-list-item>
+                <md-list-item ng-click="studentDetails(student)" ng-repeat="student in students">{{student.name}}</md-list-item>
             </md-list>
         </div>
     </div>

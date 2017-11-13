@@ -26,24 +26,40 @@ angular.module('gymApp').controller('RoutinesCtrl', ['$scope', '$location', '$md
     };
 
     $scope.createRoutine = function createRoutine() {
-        $location.path("/rutinas/crear");
+        if($rootScope.userType === 0)
+            $location.path("/rutinas/crear");
     }
 
     $scope.modifyRoutine = function modifyRoutine() {
         localStorage.setItem('isEditing', true);
         localStorage.setItem('currentRoutine',JSON.stringify($scope.selectedRoutine));
-        $location.path('rutinas/modificar/' + $scope.currentIndex + "/" + $scope.selectedRoutine.nombre);
+        if($rootScope.userType === 0)
+            $location.path('rutinas/modificar/' + $scope.currentIndex + "/" + $scope.selectedRoutine.nombre);
+        if($rootScope.userType === 1){
+            $rootScope.creating = true;
+            $rootScope.routineIndex = $scope.currentIndex;
+        }
+    }
+
+    $rootScope.getStudentRoutines = function getStudentRoutines(){
+        $scope.routines = JSON.parse(localStorage.getItem('currentStudentRoutines'));
+    }
+
+    $scope.getRoutines = function getRoutines(){
+        $scope.routines = JSON.parse(localStorage.getItem('currentRoutines'));
     }
 
     var init = function init() {
         localStorage.removeItem('isEditing');
         $scope.routines = [];
-        if(!$rootScope.user){
-            $rootScope.getUser();
+        $rootScope.getUser();
+        if($rootScope.userType === 0){
             $rootScope.getRoutines();
-        } 
-        $scope.routines = $rootScope.user.rutinas;
-        
+            $scope.getRoutines();
+        } else{
+            $rootScope.getStudent();
+            $rootScope.getStudentRoutines();
+        }
     }
 
     init();

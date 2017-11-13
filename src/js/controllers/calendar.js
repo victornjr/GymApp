@@ -11,8 +11,8 @@ angular.module('gymApp').controller('CalendarCtrl', ['$scope', '$location', '$md
             hasRoutines();
             var date = new Date($scope.currentDate);
             if($scope.hasroutines){
-                for (var property in $rootScope.user.calendario.dias[$scope.currentDate]) {
-                    if ($rootScope.user.calendario.dias[$scope.currentDate].hasOwnProperty(property)) {
+                for (var property in $scope.dates[$scope.currentDate]) {
+                    if ($scope.dates[$scope.currentDate].hasOwnProperty(property)) {
                         $rootScope.user.rutinas[property].terminado = $rootScope.user.calendario.dias[$scope.currentDate][property];
                         $scope.currentRoutines.push($rootScope.user.rutinas[property]);
                         $scope.indices.push(property);
@@ -28,7 +28,7 @@ angular.module('gymApp').controller('CalendarCtrl', ['$scope', '$location', '$md
         }
 
         var hasRoutines = function hasRoutines(){
-            if($rootScope.user.calendario.dias[$scope.currentDate]){
+            if($scope.dates[$scope.currentDate]){
                 $scope.hasroutines = true;
             } else{
                 $scope.hasroutines = false;
@@ -43,7 +43,15 @@ angular.module('gymApp').controller('CalendarCtrl', ['$scope', '$location', '$md
                 $rootScope.getRoutines();
                 $rootScope.getCalendar();
             } 
-            $rootScope.user.calendario.dias = JSON.parse(localStorage.getItem('dates'));
+
+            if($rootScope.userType === 0){
+                $rootScope.user.calendario.dias = JSON.parse(localStorage.getItem('dates'));
+                $scope.dates = $rootScope.user.calendario.dias;
+            } else{
+                $rootScope.getStudent();
+                $scope.dates = JSON.parse(localStorage.getItem('currentStudentDates'));
+                $scope.routines = JSON.parse(localStorage.getItem('currentStudentRoutines'));
+            }
             $scope.currentDate = moment().format('ll');
             $scope.indices = [];
         }

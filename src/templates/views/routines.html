@@ -1,5 +1,5 @@
-<ng-include src="'views/sidenav.html'" ng-controller="SidenavCtrl"></ng-include>
-<md-content class="main">
+<ng-include src="'views/sidenav.html'" ng-controller="SidenavCtrl" ng-if="userType == 0"></ng-include>
+<md-content class="main" ng-if="userType==0">
     <h2 class="main-header">Rutinas</h2>
     <md-card layout="row">
         <div flex="100">
@@ -22,6 +22,20 @@
     </div>
 </md-content>
 
+<md-content ng-if="userType==1" style="background-color:white">
+    <div layout="row">
+        <div flex="100">
+            <md-list flex>
+                <md-list-item class="md-3-line" ng-repeat="routine in routines track by $index" ng-click="routineDetails(routine,$index)">
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{routine.nombre}}</h3>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </div>
+    </div>
+</md-content>
+
 <div style="visibility: hidden">
     <div class="md-dialog-container" id="myDialog">
         <md-dialog layout-padding style="padding:30px">
@@ -36,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div layout="row" ng-repeat="muscle in routineExercises"> 
+            <div layout="row" ng-repeat="muscle in routineExercises">
                 <div flex="100">
                     <h4>{{muscle.muscle}}</h4>
                     <table>

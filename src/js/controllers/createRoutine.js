@@ -10,18 +10,32 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
          * Opción para agregarla directamente al calendario
          */
         $scope.cancel = function cancel() {
-            $location.path("/rutinas");
+            if($rootScope.userType === 0)
+                $location.path("/rutinas");
+            else{
+                $rootScope.creating = false;
+                $rootScope.getStudent();
+                $rootScope.getStudentRoutines();
+            }
         }
 
         $scope.createRoutine = function createRoutine() {
             var newRoutine = new Rutina($scope.routine.nombre, $scope.routineExercises);
-            newRoutine.dates = $scope.routine.dates;
-            var index = $routeParams.id;
+            if($rootScope.userType === 0)
+                newRoutine.dates = $scope.routine.dates;
+            var index = $rootScope.userType==0? $routeParams.id: $rootScope.routineIndex;
             if($rootScope.isEditing){
-                $rootScope.user.modificarRutina(newRoutine, index);
+                if($rootScope.userType === 0)
+                    $rootScope.user.modificarRutina(newRoutine, index);
+                else
+                    $rootScope.user.modificarRutina(newRoutine, index, $scope.studentRoutines);
             } else{
-                $rootScope.user.crearRutina(newRoutine);
+                if($rootScope.userType === 0)
+                    $rootScope.user.crearRutina(newRoutine);
+                else
+                    $rootScope.user.crearRutina(newRoutine, $scope.studentRoutines);
             }
+
             $scope.cancel();
         }
 
@@ -124,7 +138,15 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
                     delete item['$$hashKey'];
                 })
                 $scope.getExercises($scope.selectedMuscle);
-                getDates();
+
+                if($rootScope.userType === 0)
+                    getDates();
+
+                if($rootScope.userType === 1){
+                    $rootScope.getStudent();
+                    $scope.routine.dates = $rootScope.student.fechas;
+                    $scope.studentRoutines = $rootScope.student.rutinas;
+                }
             }
         }
 

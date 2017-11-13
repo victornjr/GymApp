@@ -1,6 +1,6 @@
-<ng-include src="'views/sidenav.html'" ng-controller="SidenavCtrl"></ng-include>
-<md-content class="main">
-    <md-card layout="row">
+<ng-include src="'views/sidenav.html'" ng-controller="SidenavCtrl" ng-if="userType==0"></ng-include>
+<md-content ng-class="{main: userType == 0, whitebg: userType==1}">
+    <md-card layout="row" ng-class="{'card-det':userType==1}">
         <div flex="100">
             <md-card-title>
                 <h3 ng-if="!isEditing">Rutina Nueva</h3>

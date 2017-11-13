@@ -1,4 +1,4 @@
-angular.module('gymApp').controller('StudentsCtrl', ['$scope', '$rootScope', '$firebaseObject', function ($scope, $rootScope, $firebaseObject) {
+angular.module('gymApp').controller('StudentsCtrl', ['$scope', '$rootScope', '$firebaseObject', '$location',function ($scope, $rootScope, $firebaseObject,$location) {
 
     var getStudentsDets = function getStudentsDets(){
         $scope.students = [];
@@ -11,8 +11,8 @@ angular.module('gymApp').controller('StudentsCtrl', ['$scope', '$rootScope', '$f
         });
     }
 
-    $scope.studentDetails = function studentDetails(studentId){
-        
+    $scope.studentDetails = function studentDetails(student){
+        $location.path('/alumnos/'+student.id+'/'+student.name)
     }
 
 

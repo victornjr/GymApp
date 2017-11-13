@@ -34,12 +34,16 @@ angular.module('gymApp', ['ngRoute', 'ngMaterial', 'firebase']).config([
                 templateUrl: 'views/students.html',
                 controller: 'StudentsCtrl'
             })
+            .when('/alumnos/:id/:name', {
+                templateUrl: 'views/studentDetails.html',
+                controller: 'StudentDetailsCtrl'
+            })
             .when('/cuestionario', {
                 templateUrl: 'views/questionnaire.html',
                 controller: 'QuestionnaireCtrl'
             });
     }
-]).run(['$rootScope', '$location', '$firebaseObject', function ($rootScope, $location, $firebaseObject) {
+]).run(['$rootScope', '$location', '$firebaseObject', '$routeParams',function ($rootScope, $location, $firebaseObject,$routeParams) {
 
     $rootScope.getUser = function getUser() {
         var user = JSON.parse(localStorage.getItem('user'));
@@ -63,9 +67,12 @@ angular.module('gymApp', ['ngRoute', 'ngMaterial', 'firebase']).config([
             angular.forEach(data, function (value, key) {
                 $rootScope.user.rutinas.push(value);
             });
+            localStorage.setItem('currentRoutines',JSON.stringify($rootScope.user.rutinas));
             localStorage.setItem('user', JSON.stringify($rootScope.user));
         });
     }
+
+    
 
     $rootScope.getCalendar = function getCalendar() {
         var ref = firebase.database().ref('alumnos/' + $rootScope.userId + '/calendario');
@@ -87,6 +94,16 @@ angular.module('gymApp', ['ngRoute', 'ngMaterial', 'firebase']).config([
                 $rootScope.user.alumnos.push(value);
             });
             localStorage.setItem('user', JSON.stringify($rootScope.user));
+        });
+    }
+
+    $rootScope.getStudent = function getStudent(){
+        var ref = firebase.database().ref('alumnos/' + $routeParams.id);
+        var data = $firebaseObject(ref);
+        data.$loaded().then(function () {
+            $rootScope.student = data;
+            localStorage.setItem('currentStudentRoutines',JSON.stringify($rootScope.student.rutinas));
+            localStorage.setItem('currentStudentDates',JSON.stringify($rootScope.student.calendario['dias']));
         });
     }
 

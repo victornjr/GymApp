@@ -11,7 +11,7 @@
             <md-list-item ng-click="navigateTo('/alumnos')" class="menu-option" ng-if="userType === 1">
                 Alumnos
             </md-list-item>
-            <md-list-item ng-click="navigateTo('/calendario')" class="menu-option">
+            <md-list-item ng-click="navigateTo('/calendario')" class="menu-option" ng-if="userType === 0">
                 Calendario
             </md-list-item>
         </md-list>

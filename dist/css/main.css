@@ -44,6 +44,14 @@ body, .view {
     padding-left: 8px !important;
 }
 
+.card-det{
+    box-shadow: none;
+}
+
+.whitebg{
+    background-color: white;
+}
+
 .loginTitle {
     font-size: 16px;
     color: #212529;

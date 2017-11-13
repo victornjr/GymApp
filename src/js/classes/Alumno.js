@@ -75,7 +75,7 @@ function Alumno(nombre, correo, contrasena) {
     }
     var id = localStorage.getItem('userId');
     database.child('alumnos/' + id + '/fechas/' + index).set(rutina.dates);
-    database.child('alumnos/' + id + '/calendario/días').set(this.calendario.dias);
+    database.child('alumnos/' + id + '/calendario/dias').set(this.calendario.dias);
   }
 
   this.terminarRutina = function terminarRutina(fecha, rutinaId, terminado){

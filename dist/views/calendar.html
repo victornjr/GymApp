@@ -1,5 +1,5 @@
-<ng-include src="'views/sidenav.html'" ng-controller="SidenavCtrl"></ng-include>
-<md-content class="main">
+<ng-include src="'views/sidenav.html'" ng-controller="SidenavCtrl" ng-if="userType === 0"></ng-include>
+<md-content ng-class="{main: userType === 0}">
     <h2 class="main-header">Calendario</h2>
     <div layout="row" style="margin: 24px 36px !important">
         <div flex="60" id="main-calendar">
@@ -18,7 +18,7 @@
                             <md-list>
                                 <md-list-item ng-repeat="routine in currentRoutines track by $index">
                                     {{routine.nombre}}
-                                    <md-checkbox ng-model="routine.terminado" ng-change="finishRoutine(routine, $index)" class="md-secondary"></md-checkbox>
+                                    <md-checkbox ng-if="userType === 0" ng-model="routine.terminado" ng-change="finishRoutine(routine, $index)" class="md-secondary"></md-checkbox>
                                 </md-list-item>
                             </md-list>
                         </div>
