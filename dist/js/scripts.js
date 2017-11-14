@@ -35552,6 +35552,7 @@ angular.module('gymApp').controller('HomeCtrl', ['$scope', '$rootScope', '$fireb
     $scope.answerRequest = function answerRequest(answer, studentId, index) {
         $rootScope.user.responderSolicitud(answer, studentId);
         $scope.requests.splice(index, 1);
+        $rootScope.getStudents();
     }
 
     var init = function init() {
@@ -35589,13 +35590,6 @@ angular.module('gymApp').controller('CalendarCtrl', ['$scope', '$location', '$md
                     $scope.indices.push(index);
                     if ($scope.dates[$scope.currentDate] && $scope.dates[$scope.currentDate][index] != null) {
                         $scope.currentRoutines[$scope.currentRoutines.length-1].terminado = true;
-                        /*if($rootScope.userType === 0){
-                            $rootScope.user.rutinas[property].terminado = $rootScope.user.calendario.dias[$scope.currentDate][property];
-                            $scope.currentRoutines.push($rootScope.user.rutinas[property]);
-                        } else{
-                            $scope.routines[property].terminado = $scope.dates[$scope.currentDate][property];
-                            $scope.currentRoutines.push($scope.routines[property]);
-                        }*/
                     }
                 }
             });
@@ -35639,7 +35633,8 @@ angular.module('gymApp').controller('CalendarCtrl', ['$scope', '$location', '$md
             $scope.mediums = ["Trote pista", "Caminadora", "Elíptica","Bici Ergonómica","Bici Spinning","Escalera","Elasticidad"];
             if($rootScope.userType === 0){
                 $rootScope.user.calendario.dias = JSON.parse(localStorage.getItem('dates'));
-                $scope.cardio = JSON.parse(localStorage.getItem('currentCardio'));
+                if(localStorage.getItem('currentCardio'))
+                    $scope.cardio = JSON.parse(localStorage.getItem('currentCardio'));
                 if($rootScope.user.calendario.dias === null){
                     $rootScope.user.calendario = new Calendario();
                     $rootScope.user.calendario.dias = {}
@@ -35681,6 +35676,7 @@ angular.module('gymApp').controller('CardioCtrl', ['$scope', '$rootScope', '$fir
             $scope.cardio.push(new Cardio($scope.newCardio.maquina, $scope.newCardio.tiempo, $scope.newCardio.fecha.toString()));
             $rootScope.user.agregarCardio($scope.cardio);
             $scope.addnew = false;
+            $rootScope.getCardio();
         }
     
         var init = function init() {
@@ -35727,7 +35723,10 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
             if($rootScope.userType === 0)
                 newRoutine.dates = $scope.routine.dates;
                 newRoutine.dia = $scope.routine.dia;
-                newRoutine.comentario = $scope.routine.comentario;
+                if($scope.routine.comentario){
+                    newRoutine.comentario = $scope.routine.comentario;
+                }
+                
             var index = $rootScope.userType==0? $routeParams.id: $rootScope.routineIndex;
             if($rootScope.isEditing){
                 if($rootScope.userType === 0)
@@ -35931,6 +35930,7 @@ angular.module('gymApp').controller('LoginCtrl', ['$scope', '$rootScope', '$loca
             } else {
                 $scope.invalidPassword = true;
                 $scope.disableConfirm = true;
+                $scope.invalidConfirm = true;
             }
         } else {
             $scope.invalidPassword = true;
@@ -36033,7 +36033,7 @@ angular.module('gymApp').controller('QuestionnaireCtrl', ['$scope', '$http', '$l
     $scope.submit = function submit() {
         $scope.questionnaire.respuestas = $scope.answers;
         $rootScope.user.hacerCuestionario($scope.questionnaire);
-        if ($scope.answers[$scope.answers.length - 1] === 'si') {
+        if ($scope.answers[10] === 'si') {
             $rootScope.user.enviarSolicitudEntrenador($scope.selectedCoach);
             //alerta de envío de respuestas y solicitud
         }

@@ -3,7 +3,7 @@ angular.module('gymApp').controller('QuestionnaireCtrl', ['$scope', '$http', '$l
     $scope.submit = function submit() {
         $scope.questionnaire.respuestas = $scope.answers;
         $rootScope.user.hacerCuestionario($scope.questionnaire);
-        if ($scope.answers[$scope.answers.length - 1] === 'si') {
+        if ($scope.answers[10] === 'si') {
             $rootScope.user.enviarSolicitudEntrenador($scope.selectedCoach);
             //alerta de envío de respuestas y solicitud
         }

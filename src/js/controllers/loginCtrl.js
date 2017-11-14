@@ -62,6 +62,7 @@ angular.module('gymApp').controller('LoginCtrl', ['$scope', '$rootScope', '$loca
             } else {
                 $scope.invalidPassword = true;
                 $scope.disableConfirm = true;
+                $scope.invalidConfirm = true;
             }
         } else {
             $scope.invalidPassword = true;

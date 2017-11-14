@@ -29,7 +29,10 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
             if($rootScope.userType === 0)
                 newRoutine.dates = $scope.routine.dates;
                 newRoutine.dia = $scope.routine.dia;
-                newRoutine.comentario = $scope.routine.comentario;
+                if($scope.routine.comentario){
+                    newRoutine.comentario = $scope.routine.comentario;
+                }
+                
             var index = $rootScope.userType==0? $routeParams.id: $rootScope.routineIndex;
             if($rootScope.isEditing){
                 if($rootScope.userType === 0)

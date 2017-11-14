@@ -16,6 +16,7 @@ angular.module('gymApp').controller('CardioCtrl', ['$scope', '$rootScope', '$fir
             $scope.cardio.push(new Cardio($scope.newCardio.maquina, $scope.newCardio.tiempo, $scope.newCardio.fecha.toString()));
             $rootScope.user.agregarCardio($scope.cardio);
             $scope.addnew = false;
+            $rootScope.getCardio();
         }
     
         var init = function init() {

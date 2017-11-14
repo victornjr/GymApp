@@ -20,6 +20,7 @@ angular.module('gymApp').controller('HomeCtrl', ['$scope', '$rootScope', '$fireb
     $scope.answerRequest = function answerRequest(answer, studentId, index) {
         $rootScope.user.responderSolicitud(answer, studentId);
         $scope.requests.splice(index, 1);
+        $rootScope.getStudents();
     }
 
     var init = function init() {

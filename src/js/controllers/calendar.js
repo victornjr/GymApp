@@ -17,13 +17,6 @@ angular.module('gymApp').controller('CalendarCtrl', ['$scope', '$location', '$md
                     $scope.indices.push(index);
                     if ($scope.dates[$scope.currentDate] && $scope.dates[$scope.currentDate][index] != null) {
                         $scope.currentRoutines[$scope.currentRoutines.length-1].terminado = true;
-                        /*if($rootScope.userType === 0){
-                            $rootScope.user.rutinas[property].terminado = $rootScope.user.calendario.dias[$scope.currentDate][property];
-                            $scope.currentRoutines.push($rootScope.user.rutinas[property]);
-                        } else{
-                            $scope.routines[property].terminado = $scope.dates[$scope.currentDate][property];
-                            $scope.currentRoutines.push($scope.routines[property]);
-                        }*/
                     }
                 }
             });
@@ -67,7 +60,8 @@ angular.module('gymApp').controller('CalendarCtrl', ['$scope', '$location', '$md
             $scope.mediums = ["Trote pista", "Caminadora", "Elíptica","Bici Ergonómica","Bici Spinning","Escalera","Elasticidad"];
             if($rootScope.userType === 0){
                 $rootScope.user.calendario.dias = JSON.parse(localStorage.getItem('dates'));
-                $scope.cardio = JSON.parse(localStorage.getItem('currentCardio'));
+                if(localStorage.getItem('currentCardio'))
+                    $scope.cardio = JSON.parse(localStorage.getItem('currentCardio'));
                 if($rootScope.user.calendario.dias === null){
                     $rootScope.user.calendario = new Calendario();
                     $rootScope.user.calendario.dias = {}
