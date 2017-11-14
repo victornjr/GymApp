@@ -6,6 +6,7 @@ angular.module('gymApp').controller('CalendarCtrl', ['$scope', '$location', '$md
          */
         $scope.changeDate = function changeDate(date){
             $scope.currentRoutines = [];
+            $scope.currentCardio = [];
             $scope.currentDate= moment(date).format('ll');
             var index = 0;
             $scope.routines.map(function(item){
@@ -26,6 +27,13 @@ angular.module('gymApp').controller('CalendarCtrl', ['$scope', '$location', '$md
                             }*/
                         }
                     }
+                }
+            });
+            $scope.cardio.map(function(item){
+                var date = new Date(item.fecha);
+                date = moment(date).format('ll');
+                if(date == $scope.currentDate){
+                    $scope.currentCardio.push(item);
                 }
             });
         }
@@ -56,16 +64,18 @@ angular.module('gymApp').controller('CalendarCtrl', ['$scope', '$location', '$md
                 $rootScope.getUser();
                 $rootScope.getRoutines();
                 $rootScope.getCalendar();
+                $rootScope.getCardio();
             } 
-
+            $scope.mediums = ["Trote pista", "Caminadora", "Elíptica","Bici Ergonómica","Bici Spinning","Escalera","Elasticidad"];
             if($rootScope.userType === 0){
                 $rootScope.user.calendario.dias = JSON.parse(localStorage.getItem('dates'));
+                $scope.cardio = JSON.parse(localStorage.getItem('currentCardio'));
                 if($rootScope.user.calendario.dias === null){
                     $rootScope.user.calendario = new Calendario();
                     $rootScope.user.calendario.dias = {}
                 }
                 $scope.dates = $rootScope.user.calendario.dias;
-                $scope.routines = $rootScope.user.rutinas;
+                $scope.routines = JSON.parse(localStorage.getItem('currentRoutines'));
                 
             } else{
                 $scope.dates = JSON.parse(localStorage.getItem('currentStudentDates'));

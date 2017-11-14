@@ -11,7 +11,7 @@
                     <h4>Fecha: {{currentDate}}</h4>
                 </md-card-title>
                 <md-card-content>
-                    <h4 ng-if="hasroutines">Rutinas</h4>
+                    <h4 ng-if="currentRoutines.length>0">Rutinas</h4>
                     <p ng-if="currentRoutines.length < 1">No hay rutinas asignadas a esta fecha.</p>
                     <div layout="row">
                         <div flex="100">
@@ -19,6 +19,17 @@
                                 <md-list-item ng-repeat="routine in currentRoutines track by $index">
                                     {{routine.nombre}}
                                     <md-checkbox ng-if="userType === 0" ng-model="routine.terminado" ng-change="finishRoutine(routine, $index)" class="md-secondary"></md-checkbox>
+                                </md-list-item>
+                            </md-list>
+                        </div>
+                    </div>
+                    <h4 ng-if="currentCardio.length>0">Cardio</h4>
+                    <p ng-if="currentCardio.length < 1">No hay ejercicios de cardio asignados a esta fecha.</p>
+                    <div layout="row">
+                        <div flex="100">
+                            <md-list>
+                                <md-list-item ng-repeat="cardio in currentCardio track by $index">
+                                    {{cardio.tiempo}} minutos de {{mediums[cardio.maquina]}}
                                 </md-list-item>
                             </md-list>
                         </div>
