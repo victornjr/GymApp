@@ -34,6 +34,11 @@ function Alumno(nombre, correo, contrasena) {
     });
   }
 
+  this.agregarCardio = function agregarCardio(cardio){
+    var id = localStorage.getItem('userId');
+    database.child('alumnos/' + id + '/cardio').set(cardio);
+  }
+
   this.crearRutina = function crearRutina(rutina) {
     if (!this.rutinas)
       this.rutinas = [];

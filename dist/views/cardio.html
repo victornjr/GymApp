@@ -6,65 +6,56 @@
                 <h3>Cardio</h3>
             </md-card-title>
             <md-card-content>
-                <div layout="row">
+                <div layout="row" ng-if="cardio.length > 0">
                     <div flex="100">
-                        <md-subheader class="md-no-sticky">Ejercicios</md-subheader>
-                        <md-list-item ng-repeat="item in cardio track by $index">
-                            <!--<md-select ng-if="exercise.selected && exercise.medium != -1" style="width:200px; margin: 5" ng-model="exercise.medio" class="formSelect md-no-underline"
-                                placeholder="Medio">
-                                <md-option ng-repeat="medium in exercise.medium" value="{{mediums[medium]}}">
-                                    {{mediums[medium]}}
-                                </md-option>
-                            </md-select>
-                            <md-input-container md-no-float class="formInput" ng-if="exercise.selected && exercise.medium == -1" style="margin:5px; width:214px !important; height:32px !important; padding:0;">
-                                <input style="border:none !important" ng-model="exercise.medio" placeholder="Medio">
-                            </md-input-container>
-                            <md-input-container md-no-float class="formInput" ng-if="exercise.selected" style="margin:5px; width:214px !important; height:32px !important; padding:0;">
-                                <input type="number" style="border:none !important" ng-model="exercise.repeticiones" placeholder="Repeticiones">
-                            </md-input-container>
-                            <md-input-container md-no-float class="formInput" ng-if="exercise.selected" style="margin:5px; width:214px !important; height:32px !important; padding:0;">
-                                <input type="number" style="border:none !important" ng-model="exercise.series" placeholder="Series">
-                            </md-input-container>-->
-                        </md-list-item>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Aparato</th>
+                                    <th>Tiempo</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="c in cardio">
+                                    <td>{{mediums[c.maquina]}}</td>
+                                    <td>{{c.tiempo}}</td>
+                                    <td>{{c.fecha}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div layout="row" ng-if="!selectedMuscle">
+                <div layout="row" ng-if="cardio.length < 1">
                     <div flex="100">
-                        <p>Selecciona un músculo para desplegar los ejercicios</p>
+                        <p>No tienes ejercicios de cardio registrados.</p>
                     </div>
                 </div>
-                <div layout="row" ng-if="selectedMuscle">
-                    <div flex="30">
-                        <md-input-container md-no-float class="formInput">
-                            <input style="border:none !important" ng-model="routine.nombre" name="name" placeholder="Nombre">
-                        </md-input-container>
-                    </div>
+                <div layout="row" ng-if="addnew">
                     <div flex="20">
-                        <md-select ng-model="selectedDay" class="formSelect md-no-underline" placeholder="Días" ng-change="setWeekday(selectedDay)">
-                            <md-option ng-repeat="day in weekDays" value="{{day.en}}">
-                                {{day.es}}
+                        <md-select style="width:200px; margin: 5" ng-model="newCardio.maquina" class="formSelect md-no-underline" placeholder="Aparato">
+                            <md-option ng-repeat="medium in mediums track by $index" value="{{$index}}">
+                                {{medium}}
                             </md-option>
                         </md-select>
                     </div>
-                    <!--<div flex="30">
-                        <md-datepicker ng-model="selectedDate" md-placeholder="Escoger fecha" ng-change="setDate(selectedDate)" md-open-on-focus></md-datepicker>
+                    <div flex="30">
+                        <md-input-container style="margin-left:20px" md-no-float class="formInput">
+                            <input style="border:none !important" ng-model="newCardio.tiempo" name="time" placeholder="Tiempo en mins">
+                        </md-input-container>
                     </div>
                     <div flex="30">
-                        <p ng-repeat="date in routine.dates">{{date}}</p>
-                    </div>-->
+                        <md-datepicker ng-model="selectedDate" md-placeholder="Escoger fecha" ng-change="setDate(selectedDate)" md-open-on-focus></md-datepicker>
+                    </div>
                 </div>
             </md-card-content>
         </div>
     </md-card>
     <div layout="row" layout-align="end" style="margin-bottom: 20px">
         <div flex="15">
-            <md-button class="md-raised md-primary" ng-click="cancel()">Cancelar
+            <md-button class="md-raised md-primary" ng-if="!addnew" ng-click="addNewCardio()">nuevo
             </md-button>
-        </div>
-        <div flex="15">
-            <md-button ng-if="!isEditing" class="md-raised md-primary" ng-click="createRoutine()">Crear rutina
-            </md-button>
-            <md-button ng-if="isEditing" class="md-raised md-primary" ng-click="createRoutine()">Aceptar
+            <md-button class="md-raised md-primary" ng-if="addnew" ng-click="createCardio()">aceptar
             </md-button>
         </div>
     </div>

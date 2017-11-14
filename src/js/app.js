@@ -26,6 +26,10 @@ angular.module('gymApp', ['ngRoute', 'ngMaterial', 'firebase']).config([
                 templateUrl: 'views/createRoutine.html',
                 controller: 'CreateRoutineCtrl'
             })
+            .when('/cardio', {
+                templateUrl: 'views/cardio.html',
+                controller: 'CardioCtrl'
+            })
             .when('/calendario', {
                 templateUrl: 'views/calendar.html',
                 controller: 'CalendarCtrl'
@@ -68,6 +72,19 @@ angular.module('gymApp', ['ngRoute', 'ngMaterial', 'firebase']).config([
                 $rootScope.user.rutinas.push(value);
             });
             localStorage.setItem('currentRoutines',JSON.stringify($rootScope.user.rutinas));
+            localStorage.setItem('user', JSON.stringify($rootScope.user));
+        });
+    }
+
+    $rootScope.getCardio = function getCardio() {
+        var ref = firebase.database().ref('alumnos/' + $rootScope.userId + '/cardio');
+        var data = $firebaseObject(ref);
+        $rootScope.user.cardio = [];
+        data.$loaded().then(function () {
+            angular.forEach(data, function (value, key) {
+                $rootScope.user.cardio.push(value);
+            });
+            localStorage.setItem('currentCardio',JSON.stringify($rootScope.user.cardio));
             localStorage.setItem('user', JSON.stringify($rootScope.user));
         });
     }

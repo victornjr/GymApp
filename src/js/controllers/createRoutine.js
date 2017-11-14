@@ -143,7 +143,7 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
                 $scope.routineExercises = $scope.routine.listaEjercicios;
                 $scope.routineExercises.map(function(item){
                     delete item['$$hashKey'];
-                })
+                });
                 $scope.getExercises($scope.selectedMuscle);
 
                 if($rootScope.userType === 0)
