@@ -57,7 +57,6 @@ angular.module('gymApp').controller('RoutinesCtrl', ['$scope', '$location', '$md
             $rootScope.getRoutines();
             $scope.getRoutines();
         } else{
-            $rootScope.getStudent();
             $rootScope.getStudentRoutines();
         }
     }

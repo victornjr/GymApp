@@ -2,7 +2,7 @@
 <md-content ng-class="{main: userType === 0}">
     <h2 class="main-header">Calendario</h2>
     <div layout="row" style="margin: 24px 36px !important">
-        <div flex="60" id="main-calendar">
+        <div flex="60" ng-class="{'main-calendar': userType == 0, 'coach-calendar': userType == 1}">
             <md-calendar ng-model="selectedDate" ng-change="changeDate(selectedDate)"></md-calendar>
         </div>
         <div flex="40">
@@ -12,7 +12,7 @@
                 </md-card-title>
                 <md-card-content>
                     <h4 ng-if="hasroutines">Rutinas</h4>
-                    <p ng-if="!hasroutines">No hay rutinas asignadas a esta fecha.</p>
+                    <p ng-if="currentRoutines.length < 1">No hay rutinas asignadas a esta fecha.</p>
                     <div layout="row">
                         <div flex="100">
                             <md-list>

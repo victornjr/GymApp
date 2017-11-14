@@ -4,13 +4,14 @@
     <md-card layout="row">
         <div flex="100">
             <md-card-content>
-                <md-list flex>
+                <md-list flex ng-if="routines.length > 0">
                     <md-list-item class="md-3-line" ng-repeat="routine in routines track by $index" ng-click="routineDetails(routine,$index)">
                         <div class="md-list-item-text" layout="column">
                             <h3>{{routine.nombre}}</h3>
                         </div>
                     </md-list-item>
                 </md-list>
+                <p ng-if="routines.length < 1">No tienes rutinas registradas.</p>
             </md-card-content>
         </div>
     </md-card>
@@ -25,13 +26,14 @@
 <md-content ng-if="userType==1" style="background-color:white">
     <div layout="row">
         <div flex="100">
-            <md-list flex>
+            <md-list flex ng-if="routines.length > 0">
                 <md-list-item class="md-3-line" ng-repeat="routine in routines track by $index" ng-click="routineDetails(routine,$index)">
                     <div class="md-list-item-text" layout="column">
                         <h3>{{routine.nombre}}</h3>
                     </div>
                 </md-list-item>
             </md-list>
+            <p ng-if="routines.length < 1">El alumno no tiene rutinas registradas.</p>
         </div>
     </div>
 </md-content>
@@ -72,6 +74,7 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
         </md-dialog>
-        </div>
     </div>
+</div>

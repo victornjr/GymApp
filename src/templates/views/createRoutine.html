@@ -56,12 +56,19 @@
                             <input style="border:none !important" ng-model="routine.nombre" name="name" placeholder="Nombre">
                         </md-input-container>
                     </div>
-                    <div flex="30">
+                    <div flex="20">
+                        <md-select ng-model="selectedDay" class="formSelect md-no-underline" placeholder="Días" ng-change="setWeekday(selectedDay)">
+                            <md-option ng-repeat="day in weekDays" value="{{day.en}}">
+                                {{day.es}}
+                            </md-option>
+                        </md-select>
+                    </div>
+                    <!--<div flex="30">
                         <md-datepicker ng-model="selectedDate" md-placeholder="Escoger fecha" ng-change="setDate(selectedDate)" md-open-on-focus></md-datepicker>
                     </div>
                     <div flex="30">
                         <p ng-repeat="date in routine.dates">{{date}}</p>
-                    </div>
+                    </div>-->
                 </div>
             </md-card-content>
         </div>

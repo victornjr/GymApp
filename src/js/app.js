@@ -97,8 +97,9 @@ angular.module('gymApp', ['ngRoute', 'ngMaterial', 'firebase']).config([
         });
     }
 
-    $rootScope.getStudent = function getStudent(){
-        var ref = firebase.database().ref('alumnos/' + $routeParams.id);
+    $rootScope.getStudent = function getStudent(id){
+        var studentId = id? id: $routeParams.id;
+        var ref = firebase.database().ref('alumnos/' + studentId);
         var data = $firebaseObject(ref);
         data.$loaded().then(function () {
             $rootScope.student = data;

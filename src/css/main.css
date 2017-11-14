@@ -157,21 +157,39 @@ md-list-item p{
     font-size: 13px;
 }
 
-#main-calendar .md-calendar th, td{
+.main-calendar .md-calendar th, td{
     font-size: 14px;
     text-align: left;
     width: 150px;
     padding: 10px 0px;
 }
 
-#main-calendar .md-calendar-day-header, .md-calendar-scroll-container, .md-calendar-scroll-mask .md-virtual-repeat-container, .md-orient-vertical, #main-calendar .md-calendar{
+.main-calendar .md-calendar-day-header, .md-calendar-scroll-container, .md-calendar-scroll-mask .md-virtual-repeat-container, .md-orient-vertical, .main-calendar .md-calendar{
     width: 600px;
     height: 500px;
     margin:0px;
     overflow: visible !important;
 }
 
-#main-calendar .md-calendar-scroll-mask{
+.main-calendar .md-calendar-scroll-mask{
+    min-height: 500px !important;
+}
+
+.coach-calendar .md-calendar th, td{
+    font-size: 14px;
+    text-align: left;
+    width: 100px;
+    padding: 10px 0px;
+}
+
+.coach-calendar .md-calendar-day-header, .md-calendar-scroll-container, .md-calendar-scroll-mask .md-virtual-repeat-container, .md-orient-vertical, .coach-calendar .md-calendar{
+    width: 500px;
+    height: 500px;
+    margin:0px;
+    overflow: visible !important;
+}
+
+.coach-calendar .md-calendar-scroll-mask{
     min-height: 500px !important;
 }
 

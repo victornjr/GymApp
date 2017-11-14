@@ -1,0 +1,62 @@
+<ng-include src="'views/sidenav.html'" ng-controller="SidenavCtrl"></ng-include>
+<md-content class="main">
+    <md-card layout="row">
+        <div flex="100">
+            <md-card-title>
+                <h3>Cardio</h3>
+            </md-card-title>
+            <md-card-content>
+                <div layout="row" ng-if="cardio.length > 0">
+                    <div flex="100">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Aparato</th>
+                                    <th>Tiempo</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="c in cardio">
+                                    <td>{{c.medium}}</td>
+                                    <td>{{c.time}}</td>
+                                    <td>{{c.date}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div layout="row" ng-if="cardio.length < 1">
+                    <div flex="100">
+                        <p>No tienes ejercicios de cardio registrados.</p>
+                    </div>
+                </div>
+                <div layout="row" ng-if="selectedMuscle">
+                    <div flex="20">
+                        
+                    </div>
+                    <div flex="30">
+                        <md-input-container md-no-float class="formInput">
+                            <input style="border:none !important" ng-model="routine.nombre" name="name" placeholder="Nombre">
+                        </md-input-container>
+                    </div>
+                    <div flex="30">
+                        <md-datepicker ng-model="selectedDate" md-placeholder="Escoger fecha" ng-change="setDate(selectedDate)" md-open-on-focus></md-datepicker>
+                    </div>
+                </div>
+            </md-card-content>
+        </div>
+    </md-card>
+    <div layout="row" layout-align="end" style="margin-bottom: 20px">
+        <div flex="15">
+            <md-button class="md-raised md-primary" ng-click="cancel()">Cancelar
+            </md-button>
+        </div>
+        <div flex="15">
+            <md-button ng-if="!isEditing" class="md-raised md-primary" ng-click="createRoutine()">Crear rutina
+            </md-button>
+            <md-button ng-if="isEditing" class="md-raised md-primary" ng-click="createRoutine()">Aceptar
+            </md-button>
+        </div>
+    </div>
+</md-content>

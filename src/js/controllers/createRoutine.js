@@ -10,9 +10,12 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
          * Opción para agregarla directamente al calendario
          */
         $scope.cancel = function cancel() {
-            if($rootScope.userType === 0)
+            if($rootScope.userType === 0){
+                $rootScope.getUser();
+                $rootScope.getRoutines();
+                $rootScope.getCalendar();
                 $location.path("/rutinas");
-            else{
+            } else{
                 $rootScope.creating = false;
                 $rootScope.getStudent();
                 $rootScope.getStudentRoutines();
@@ -23,6 +26,7 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
             var newRoutine = new Rutina($scope.routine.nombre, $scope.routineExercises);
             if($rootScope.userType === 0)
                 newRoutine.dates = $scope.routine.dates;
+                newRoutine.dia = $scope.routine.dia;
             var index = $rootScope.userType==0? $routeParams.id: $rootScope.routineIndex;
             if($rootScope.isEditing){
                 if($rootScope.userType === 0)
@@ -114,11 +118,14 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
             });
         }
 
+        $scope.setWeekday = function setWeekday(day){
+            $scope.routine.dia = day;
+        }
+
         var init = function init() {
-            if(!$rootScope.user){
-                $rootScope.getUser();
-                $rootScope.getRoutines();
-            }
+            $rootScope.getUser();
+            $rootScope.getRoutines();
+            $rootScope.getCalendar();
             $scope.muscles = [];
             $scope.exercises = [];
             $scope.mediums = [];
@@ -142,12 +149,18 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
                 if($rootScope.userType === 0)
                     getDates();
 
-                if($rootScope.userType === 1){
-                    $rootScope.getStudent();
+                if($rootScope.userType === 1)
                     $scope.routine.dates = $rootScope.student.fechas;
-                    $scope.studentRoutines = $rootScope.student.rutinas;
-                }
             }
+
+            if($rootScope.userType === 1){
+                $rootScope.getStudent();
+                
+                $scope.studentRoutines = JSON.parse(localStorage.getItem('currentStudentRoutines'));
+            }
+
+            $scope.weekDays = [{es: 'Lunes', en: 'Monday'},{es: 'Martes', en: 'Tuesday'},{es: 'Miércoles', en: 'Wednesday'},{es: 'Jueves', en: 'Thursday'},
+            {es: 'Viernes', en: 'Friday'},{es: 'Sábado', en: 'Saturday'},{es: 'Domingo', en: 'Sunday'},]
         }
 
         init();

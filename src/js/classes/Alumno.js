@@ -40,9 +40,6 @@ function Alumno(nombre, correo, contrasena) {
     this.rutinas.push(rutina);
     var id = localStorage.getItem('userId');
     database.child('alumnos/' + id + '/rutinas').set(this.rutinas);
-    if(rutina.dates.length > 0){
-      this.agregarAFecha(this.rutinas[this.rutinas.length-1], this.rutinas.length-1);
-    }
   }
 
   this.modificarRutina = function modificarRutina(rutina, index){
@@ -50,9 +47,6 @@ function Alumno(nombre, correo, contrasena) {
     this.rutinas[index] = rutina;
     var id = localStorage.getItem('userId');
     database.child('alumnos/' + id + '/rutinas').set(this.rutinas);
-    if(rutina.dates.length > 0){
-      this.agregarAFecha(this.rutinas[index],index);
-    }
   }
 
   this.agregarAFecha = function agregarAFecha(rutina, index){
@@ -81,7 +75,7 @@ function Alumno(nombre, correo, contrasena) {
   this.terminarRutina = function terminarRutina(fecha, rutinaId, terminado){
     this.calendario.dias[fecha][rutinaId] = terminado;
     var id = localStorage.getItem('userId');
-    database.child('alumnos/' + id + '/calendario/días/' + fecha + '/' + rutinaId).set(terminado);
+    database.child('alumnos/' + id + '/calendario/dias/' + fecha + '/' + rutinaId).set(terminado);
   }
 
 }
