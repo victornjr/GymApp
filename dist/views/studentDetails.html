@@ -6,7 +6,7 @@
             <md-content>
                 <md-tabs md-dynamic-height md-border-bottom style="background-color:white">
                     <md-tab label="Rutinas" ng-click="setTab(0)">
-                        <md-content class="md-padding" style="background-color:white">
+                        <md-content class="md-padding">
                             <ng-include src="'views/routines.html'" ng-controller="RoutinesCtrl" ng-if="!creating"></ng-include>
                             <ng-include src="'views/createRoutine.html'" ng-controller="CreateRoutineCtrl" ng-if="creating"></ng-include>
                         </md-content>

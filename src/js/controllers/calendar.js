@@ -10,22 +10,20 @@ angular.module('gymApp').controller('CalendarCtrl', ['$scope', '$location', '$md
             $scope.currentDate= moment(date).format('ll');
             var index = 0;
             $scope.routines.map(function(item){
+                index++;
                 if(item.dia === moment(date).format('dddd')){
                     item.terminado = false;
                     $scope.currentRoutines.push(item);
                     $scope.indices.push(index);
-                    index++;
-                    for (var property in $scope.dates[$scope.currentDate]) {
-                        if ($scope.dates[$scope.currentDate].hasOwnProperty(property) && $scope.dates[$scope.currentDate][property] != null) {
-                            $scope.currentRoutines[$scope.currentRoutines.length-1].terminado = true;
-                            /*if($rootScope.userType === 0){
-                                $rootScope.user.rutinas[property].terminado = $rootScope.user.calendario.dias[$scope.currentDate][property];
-                                $scope.currentRoutines.push($rootScope.user.rutinas[property]);
-                            } else{
-                                $scope.routines[property].terminado = $scope.dates[$scope.currentDate][property];
-                                $scope.currentRoutines.push($scope.routines[property]);
-                            }*/
-                        }
+                    if ($scope.dates[$scope.currentDate] && $scope.dates[$scope.currentDate][index] != null) {
+                        $scope.currentRoutines[$scope.currentRoutines.length-1].terminado = true;
+                        /*if($rootScope.userType === 0){
+                            $rootScope.user.rutinas[property].terminado = $rootScope.user.calendario.dias[$scope.currentDate][property];
+                            $scope.currentRoutines.push($rootScope.user.rutinas[property]);
+                        } else{
+                            $scope.routines[property].terminado = $scope.dates[$scope.currentDate][property];
+                            $scope.currentRoutines.push($scope.routines[property]);
+                        }*/
                     }
                 }
             });
@@ -78,11 +76,15 @@ angular.module('gymApp').controller('CalendarCtrl', ['$scope', '$location', '$md
                 $scope.routines = JSON.parse(localStorage.getItem('currentRoutines'));
                 
             } else{
+                $rootScope.getStudent();
                 $scope.dates = JSON.parse(localStorage.getItem('currentStudentDates'));
                 $scope.routines = JSON.parse(localStorage.getItem('currentStudentRoutines'));
+                $scope.cardio = JSON.parse(localStorage.getItem('currentStudentCardio'));
             }
             $scope.currentDate = moment().format('ll');
+            
             $scope.indices = [];
+            $scope.changeDate($scope.currentDate);
         }
 
         init();

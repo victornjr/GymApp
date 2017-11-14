@@ -23,7 +23,7 @@
     </div>
 </md-content>
 
-<md-content ng-if="userType==1" style="background-color:white">
+<md-content ng-if="userType==1">
     <div layout="row">
         <div flex="100">
             <md-list flex ng-if="routines.length > 0">
@@ -45,7 +45,7 @@
                 <div flex="40">
                     <h3>{{selectedRoutine.nombre}}</h3>
                 </div>
-                <div flex="80" layout="row" layout-align="end center">
+                <div flex="60" layout="row" layout-align="center center">
                     <div flex="20">
                         <md-button class="md-raised md-primary" ng-click="modifyRoutine()">Editar
                         </md-button>
@@ -57,15 +57,15 @@
                     <h4>{{muscle.muscle}}</h4>
                     <table>
                         <thead>
-                            <tr>
-                                <th>Ejercicio</th>
+                            <tr class="ga-table">
+                                <th style="width:200px">Ejercicio</th>
                                 <th>Series</th>
                                 <th>Repeticiones</th>
-                                <th>Medio</th>
+                                <th style="width:150px">Medio</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="exercise in muscle.exercises">
+                            <tr ng-repeat="exercise in muscle.exercises" class="ga-table">
                                 <td>{{exercise.nombre}}</td>
                                 <td>{{exercise.series}}</td>
                                 <td>{{exercise.repeticiones}}</td>
@@ -73,6 +73,12 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+            <div layout="row" ng-if="selectedRoutine.comentario">
+                <div flex="100">
+                    <h4>Comentarios</h4>
+                    <p>{{selectedRoutine.comentario}}</p>
                 </div>
             </div>
         </md-dialog>

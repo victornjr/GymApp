@@ -2,7 +2,7 @@
     <div flex="70">
         <h3 style="margin:0; padding: 20px">GymApp</h3>
         <md-list>
-            <md-list-item ng-click="navigateTo('/inicio')" class="menu-option">
+            <md-list-item ng-click="navigateTo('/inicio')" class="menu-option" ng-if="userType === 1">
                 Dashboard
             </md-list-item>
             <md-list-item ng-click="navigateTo('/rutinas')" class="menu-option" ng-if="userType === 0">

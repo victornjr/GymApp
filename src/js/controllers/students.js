@@ -13,7 +13,7 @@ angular.module('gymApp').controller('StudentsCtrl', ['$scope', '$rootScope', '$f
 
     $scope.studentDetails = function studentDetails(student){
         $rootScope.getStudent(student.id);
-        $location.path('/alumnos/'+student.id+'/'+student.name)
+        $location.path('/alumnos/'+student.id+'/'+student.name);
     }
 
 

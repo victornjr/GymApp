@@ -49,18 +49,16 @@ angular.module('gymApp').controller('RoutinesCtrl', ['$scope', '$location', '$md
         $scope.routines = JSON.parse(localStorage.getItem('currentRoutines'));
     }
 
-    var init = function init() {
-        localStorage.removeItem('isEditing');
-        $scope.routines = [];
-        $rootScope.getUser();
-        if($rootScope.userType === 0){
-            $rootScope.getRoutines();
-            $scope.getRoutines();
-        } else{
-            $rootScope.getStudentRoutines();
-        }
+
+    localStorage.removeItem('isEditing');
+    $scope.routines = [];
+    $rootScope.getUser();
+    if($rootScope.userType === 0){
+        $rootScope.getRoutines();
+        $scope.getRoutines();
+    } else{
+        $rootScope.getStudentRoutines();
     }
 
-    init();
 }
 ]);

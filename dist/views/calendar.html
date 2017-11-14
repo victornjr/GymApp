@@ -19,6 +19,7 @@
                                 <md-list-item ng-repeat="routine in currentRoutines track by $index">
                                     {{routine.nombre}}
                                     <md-checkbox ng-if="userType === 0" ng-model="routine.terminado" ng-change="finishRoutine(routine, $index)" class="md-secondary"></md-checkbox>
+                                    <p class="md-secondary" ng-if="userType === 1 && routine.terminado">Terminado</p>
                                 </md-list-item>
                             </md-list>
                         </div>

@@ -10,9 +10,17 @@ angular.module('gymApp').controller('QuestionnaireCtrl', ['$scope', '$http', '$l
         $location.path("/inicio");
     }
 
-    $scope.toggleAnswer = function toggleAnswer(answer, index) {
+    $scope.toggleAnswer = function toggleAnswer(answer, index, tofalse) {
         //Intercambiar checkbox -buscar groups-
-        $scope.answers[index] = answer;
+        if($scope.answers[index] == answer){
+            $scope.answers.splice(index,1);
+            $scope.answered--;
+        }else if(!$scope.answers[index]){
+            $scope.answers[index] = answer;
+            $scope.answered++;
+        } else if($scope.answers[index]){
+            $scope.answers[index] = answer;
+        }
     }
 
     $scope.setCoach = function setCoach(coach){
@@ -31,6 +39,8 @@ angular.module('gymApp').controller('QuestionnaireCtrl', ['$scope', '$http', '$l
     }
 
     var init = function init() {
+        $rootScope.getUser();
+        $scope.answered = 0;
         $scope.questionnaire = new CuestionarioInicial();
         $scope.questions = $scope.questionnaire.preguntas;
         $scope.answers = [];

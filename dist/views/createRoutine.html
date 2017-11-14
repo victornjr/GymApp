@@ -63,12 +63,13 @@
                             </md-option>
                         </md-select>
                     </div>
-                    <!--<div flex="30">
-                        <md-datepicker ng-model="selectedDate" md-placeholder="Escoger fecha" ng-change="setDate(selectedDate)" md-open-on-focus></md-datepicker>
-                    </div>
+                </div>
+                <div ng-if="userType === 1">
                     <div flex="30">
-                        <p ng-repeat="date in routine.dates">{{date}}</p>
-                    </div>-->
+                        <md-input-container md-no-float class="formInput">
+                            <input style="border:none !important" ng-model="routine.comentario" name="comment" placeholder="Comentarios">
+                        </md-input-container>
+                    </div>
                 </div>
             </md-card-content>
         </div>
@@ -79,7 +80,7 @@
             </md-button>
         </div>
         <div flex="15">
-            <md-button ng-if="!isEditing" class="md-raised md-primary" ng-click="createRoutine()">Crear rutina
+            <md-button ng-if="!isEditing" class="md-raised md-primary" ng-click="createRoutine()" ng-disabled="!selectedMuscle || routineExercises.length < 1 || !routine.nombre">Crear rutina
             </md-button>
             <md-button ng-if="isEditing" class="md-raised md-primary" ng-click="createRoutine()">Aceptar
             </md-button>

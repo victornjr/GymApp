@@ -10,16 +10,16 @@
                     <div flex="100">
                         <table>
                             <thead>
-                                <tr>
-                                    <th>Aparato</th>
-                                    <th>Tiempo</th>
-                                    <th>Fecha</th>
+                                <tr class="ga-table">
+                                    <th style="width: 200px">Aparato</th>
+                                    <th style="width: 200px">Tiempo</th>
+                                    <th style="width: 200px">Fecha</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="c in cardio">
+                                <tr ng-repeat="c in cardio" class="ga-table">
                                     <td>{{mediums[c.maquina]}}</td>
-                                    <td>{{c.tiempo}}</td>
+                                    <td>{{c.tiempo}} minutos</td>
                                     <td>{{c.fecha}}</td>
                                 </tr>
                             </tbody>

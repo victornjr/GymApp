@@ -1,4 +1,4 @@
-angular.module('gymApp').controller('HomeCtrl', ['$scope', '$rootScope', '$firebaseObject', function ($scope, $rootScope, $firebaseObject) {
+angular.module('gymApp').controller('HomeCtrl', ['$scope', '$rootScope', '$firebaseObject','$location', function ($scope, $rootScope, $firebaseObject,$location) {
 
 
     var getRequests = function getRequests() {
@@ -26,6 +26,11 @@ angular.module('gymApp').controller('HomeCtrl', ['$scope', '$rootScope', '$fireb
         $rootScope.getUser();
         $rootScope.getStudents();
         $rootScope.getRoutines();
+        if($rootScope.userType === 0){
+            $rootScope.getCalendar();
+            $rootScope.getCardio();
+            $location.path('/rutinas');
+        }
         getRequests();
     }
 

@@ -1,5 +1,5 @@
-angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location', '$firebaseObject', '$rootScope','$routeParams',
-    function ($scope, $location, $firebaseObject, $rootScope, $routeParams) {
+angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location', '$firebaseObject', '$rootScope','$routeParams','$window',
+    function ($scope, $location, $firebaseObject, $rootScope, $routeParams,$window) {
 
 
         /**
@@ -9,7 +9,7 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
          * Agregar opción de cardio y tiempo
          * Opción para agregarla directamente al calendario
          */
-        $scope.cancel = function cancel() {
+        $scope.cancel = function cancel(created) {
             if($rootScope.userType === 0){
                 $rootScope.getUser();
                 $rootScope.getRoutines();
@@ -19,6 +19,8 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
                 $rootScope.creating = false;
                 $rootScope.getStudent();
                 $rootScope.getStudentRoutines();
+                if(created)
+                    $window.location.reload();
             }
         }
 
@@ -27,6 +29,7 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
             if($rootScope.userType === 0)
                 newRoutine.dates = $scope.routine.dates;
                 newRoutine.dia = $scope.routine.dia;
+                newRoutine.comentario = $scope.routine.comentario;
             var index = $rootScope.userType==0? $routeParams.id: $rootScope.routineIndex;
             if($rootScope.isEditing){
                 if($rootScope.userType === 0)
@@ -40,7 +43,7 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
                     $rootScope.user.crearRutina(newRoutine, $scope.studentRoutines);
             }
 
-            $scope.cancel();
+            $scope.cancel(true);
         }
 
         var getMuscles = function getMuscles() {
@@ -136,9 +139,13 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
             $scope.routine = {nombre:undefined, dates:[]}
             $rootScope.isEditing = localStorage.getItem('isEditing');
             $scope.selectedDate = moment().format('ll');
+            if($rootScope.userType === 1){
+                $rootScope.getStudent();
+                
+                $scope.studentRoutines = JSON.parse(localStorage.getItem('currentStudentRoutines'));
+            }
             if($rootScope.isEditing){
                 $scope.routine = JSON.parse(localStorage.getItem('currentRoutine'));
-
                 $scope.selectedMuscle = $scope.routine.listaEjercicios[0].musculo;
                 $scope.routineExercises = $scope.routine.listaEjercicios;
                 $scope.routineExercises.map(function(item){
@@ -153,11 +160,7 @@ angular.module('gymApp').controller('CreateRoutineCtrl', ['$scope', '$location',
                     $scope.routine.dates = $rootScope.student.fechas;
             }
 
-            if($rootScope.userType === 1){
-                $rootScope.getStudent();
-                
-                $scope.studentRoutines = JSON.parse(localStorage.getItem('currentStudentRoutines'));
-            }
+            
 
             $scope.weekDays = [{es: 'Lunes', en: 'Monday'},{es: 'Martes', en: 'Tuesday'},{es: 'Miércoles', en: 'Wednesday'},{es: 'Jueves', en: 'Thursday'},
             {es: 'Viernes', en: 'Friday'},{es: 'Sábado', en: 'Saturday'},{es: 'Domingo', en: 'Sunday'},]

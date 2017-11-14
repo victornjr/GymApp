@@ -1,5 +1,5 @@
-<ng-include src="'views/sidenav.html'" ng-controller="SidenavCtrl"></ng-include>
-<md-content class="main">
+<!--<ng-include src="'views/sidenav.html'" ng-controller="SidenavCtrl"></ng-include>-->
+<md-content class="main" style="margin-left:0px !important">
     <h2 class="main-header">Cuestionario Inicial</h2>
     <md-card layout="row">
         <div flex="100">
@@ -11,14 +11,14 @@
                         </div>
                         <div layout="row">
                             <md-input-container style="margin-right: 20px">
-                                <md-checkbox ng-model="positive" ng-change="toggleAnswer('si',$index)">Sí</md-checkbox>
+                                <md-checkbox ng-model="positive" ng-change="toggleAnswer('si',$index, negative)">Sí</md-checkbox>
                             </md-input-container>
                             <md-input-container>
-                                <md-checkbox ng-model="negative" ng-change="toggleAnswer('no',$index)">No</md-checkbox>
+                                <md-checkbox ng-model="negative" ng-change="toggleAnswer('no',$index,positive)">No</md-checkbox>
                             </md-input-container>
                         </div>
                     </div>
-                    <div layout="row" ng-if="answers[answers.length-1] === 'si'">
+                    <div layout="row" ng-if="answers[10] === 'si'">
                         <div flex="30">
                             <md-select ng-model="selectedCoach" class="formSelect md-no-underline" placeholder="Entrenadores" ng-change="setCoach(selectedCoach)">
                                 <md-option ng-repeat="coach in coaches" value="{{coach.id}}">
@@ -33,7 +33,7 @@
     </md-card>
     <div layout="row" layout-align="end" style="margin-bottom: 20px">
         <div flex="20">
-            <md-button class="md-raised md-primary" ng-click="submit()">Enviar
+            <md-button class="md-raised md-primary" ng-disabled="answered < questions.length" ng-click="submit()">Enviar
             </md-button>
         </div>
     </div>
